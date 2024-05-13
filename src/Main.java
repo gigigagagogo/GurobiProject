@@ -68,33 +68,20 @@ public class Main {
             File file = new File(filename);
             fileScanner = new Scanner(file);
 
-            //read d
             d = getVariableFromScanner("d");
 
-            // read t array
             t = getArrayFromScanner("t");
             n = t.length;
 
-            // read l
             l = getVariableFromScanner("l");
 
-            // read tau
             tau = getArrayFromScanner("tau");
             if (tau.length != n) throw new IllegalArgumentException(INPUT_FILE_FORMAT_ERROR);
 
-            // read tmax
             tmax = getVariableFromScanner("tmax");
-
-            // read k
             k = getVariableFromScanner("k");
-
-            // read a
             a = getVariableFromScanner("a");
-
-            // read b
             b = getVariableFromScanner("b");
-
-            // read c
             c = getVariableFromScanner("c");
 
             fileScanner.close();

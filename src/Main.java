@@ -1,16 +1,17 @@
 import com.gurobi.gurobi.*;
 
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static final String INPUT_FILE_FORMAT_ERROR = "Input file format error";
-    static int d; // numero giorni
+    static Scanner fileScanner;
+    static Scanner lineScanner;
+    static int d; // inumero giorni
     static int n; // numero di materie
-    static int t[]; // ore per materia nell'arco dei giorni
-    static int tau[]; // ore minime per materia, se studiata, al giorno
+    static int[] t; // ore per materia nell'arco dei giorni
+    static int[] tau; // ore minime per materia, se studiata, al giorno
     static int l; // numero di materie differenti massime al giorno
     static int tmax; // ore massime di studio totali al giorno
     static int k; // indice relativo alla materia piu importante
@@ -20,91 +21,86 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            readFile();
+            String filename = "input/instance-11.txt";
+            parseInputFile(filename);
+
+            GRBEnv env = new GRBEnv("/dev/null");
 
         } catch (GRBException e) {
-            e.printStackTrace();
+            System.out.println("An exception occurred: " + e.getMessage());
         }
     }
 
-    static void readFile() {
+    static int getVariableFromScanner(String expectedVariable) {
+        if (!fileScanner.hasNext() || !fileScanner.next().equals(expectedVariable)) throw new IllegalArgumentException(INPUT_FILE_FORMAT_ERROR);
         try {
-            String filename = "input/instance-11.txt";
+            String value = fileScanner.nextLine();
+            return Integer.parseInt(value.trim());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(INPUT_FILE_FORMAT_ERROR);
+        }
+    }
+
+    static int[] getArrayFromScanner(String expectedArrayName) {
+        try {
+            String line = fileScanner.nextLine();
+            lineScanner = new Scanner(line);
+        } catch (Exception e) {
+            throw new IllegalArgumentException(INPUT_FILE_FORMAT_ERROR);
+        }
+
+        if (!lineScanner.next().equals(expectedArrayName)) throw new IllegalArgumentException(INPUT_FILE_FORMAT_ERROR);
+        ArrayList<Integer> list = new ArrayList<>();
+        while (lineScanner.hasNext()) {
+            try {
+                String value = lineScanner.next();
+                list.add(Integer.parseInt(value.trim()));
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException(INPUT_FILE_FORMAT_ERROR);
+            }
+        }
+        lineScanner.close();
+        return list.stream().mapToInt(i -> i).toArray();
+    }
+
+    static void parseInputFile(String filename) {
+        try {
             File file = new File(filename);
-            Scanner scanner = new Scanner(file);
+            fileScanner = new Scanner(file);
 
             //read d
-            if (!scanner.next().equals("d")) throw new IllegalArgumentException(INPUT_FILE_FORMAT_ERROR);
-            d = scanner.nextInt();
-            scanner.nextLine(); // read trailing newline
+            d = getVariableFromScanner("d");
 
             // read t array
-            String line = scanner.nextLine();
-            Scanner lineScanner = new Scanner(line);
-            if (!lineScanner.next().equals("t")) throw new IllegalArgumentException(INPUT_FILE_FORMAT_ERROR);
-            ArrayList<Integer> arrayList = new ArrayList<>();
-            while (lineScanner.hasNext()) {
-                arrayList.add(lineScanner.nextInt());
-            }
-            t = new int[arrayList.size()];
-            int n = 0;
-            for (Integer num : arrayList) {
-                t[n++] = num;
-            }
-            lineScanner.nextLine(); // remove trailing newline char
-            lineScanner.close();
+            t = getArrayFromScanner("t");
+            n = t.length;
 
             // read l
-            if (!scanner.next().equals("l")) throw new IllegalArgumentException(INPUT_FILE_FORMAT_ERROR);
-            l = scanner.nextInt();
-            scanner.nextLine(); // read trailing newline
+            l = getVariableFromScanner("l");
 
             // read tau
-            line = scanner.nextLine();
-            lineScanner = new Scanner(line);
-            if (!lineScanner.next().equals("tau")) throw new IllegalArgumentException(INPUT_FILE_FORMAT_ERROR);
-            arrayList = new ArrayList<>();
-            while (lineScanner.hasNext()) {
-                arrayList.add(lineScanner.nextInt());
-            }
-            if (arrayList.size() != n) throw new IllegalArgumentException(INPUT_FILE_FORMAT_ERROR);
-            tau = new int[n];
-            for (int i = 0; i < n; i++) {
-                tau[i] = arrayList.get(i);
-
-            }
-            lineScanner.nextLine(); // remove trailing newline char
-            lineScanner.close();
+            tau = getArrayFromScanner("tau");
+            if (tau.length != n) throw new IllegalArgumentException(INPUT_FILE_FORMAT_ERROR);
 
             // read tmax
-            if (!scanner.next().equals("tmax")) throw new IllegalArgumentException(INPUT_FILE_FORMAT_ERROR);
-            tmax = scanner.nextInt();
-            scanner.nextLine(); // read trailing newline
+            tmax = getVariableFromScanner("tmax");
 
             // read k
-            if (!scanner.next().equals("k")) throw new IllegalArgumentException(INPUT_FILE_FORMAT_ERROR);
-            k = scanner.nextInt();
-            scanner.nextLine(); // read trailing newline
+            k = getVariableFromScanner("k");
 
             // read a
-            if (!scanner.next().equals("a")) throw new IllegalArgumentException(INPUT_FILE_FORMAT_ERROR);
-            a = scanner.nextInt();
-            scanner.nextLine(); // read trailing newline
+            a = getVariableFromScanner("a");
 
             // read b
-            if (!scanner.next().equals("b")) throw new IllegalArgumentException(INPUT_FILE_FORMAT_ERROR);
-            b = scanner.nextInt();
-            scanner.nextLine(); // read trailing newline
+            b = getVariableFromScanner("b");
 
             // read c
-            if (!scanner.next().equals("c")) throw new IllegalArgumentException(INPUT_FILE_FORMAT_ERROR);
-            c = scanner.nextInt();
-            scanner.nextLine(); // read trailing newline
+            c = getVariableFromScanner("c");
 
-            scanner.close();
+            fileScanner.close();
 
         } catch (Exception e) {
-            e.printStackTrace();
-        };
+            System.out.println("An exception occurred: " + e.getMessage());
+        }
     }
 }

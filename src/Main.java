@@ -39,6 +39,8 @@ public class Main {
 
             aggiungiVincolo1(intero);
             aggiungiVincolo2(intero);
+            aggiungiVincolo3(intero);
+            aggiungiVincolo4(intero);
 
             intero.write("logs/write.lp");
 
@@ -84,11 +86,11 @@ public class Main {
 
     public static void aggiungiVincolo1(GRBModel model) throws GRBException {
         for (int i = 0; i < n; i++) {
+            GRBLinExpr lhs = new GRBLinExpr();
             for (int j = 0; j < d; j++) {
-                GRBLinExpr expr = new GRBLinExpr();
-                expr.addTerm(1, x[i][j]);
-                model.addConstr(expr, GRB.GREATER_EQUAL, tau[i], "Ore minime giornaliere");
+                lhs.addTerm(1, x[i][j]);
             }
+            model.addConstr(lhs, GRB.GREATER_EQUAL, tau[i], "Ore minime giornaliere");
         }
     }
 
@@ -107,11 +109,29 @@ public class Main {
         }
     }
 
-    public static void aggiungiVincolo3(GRBModel model) {
 
+    public static void aggiungiVincolo3(GRBModel model) throws GRBException{
+        for(int j = 0; j < d; j++){
+            GRBLinExpr lhs = new GRBLinExpr();
+            for(int i = 0; i < n; i++){
+                lhs.addTerm(1, y[i][j]);
+            }
+            model.addConstr(lhs, GRB.LESS_EQUAL, l, "Numero max di materie al giorno");
+        }
     }
 
-    static int getVariableFromScanner(String expectedVariable) {
+    public static void aggiungiVincolo4(GRBModel model) throws GRBException{
+        for (int j = 0; j < d; j++) {
+            GRBLinExpr lhs = new GRBLinExpr();
+            for (int i = 0; i < n; i++) {
+                lhs.addTerm(1, x[i][j]);
+            }
+            model.addConstr(lhs, GRB.LESS_EQUAL, tmax, "Ore max giornaliere");
+        }
+    }
+
+
+    public static int getVariableFromScanner(String expectedVariable) {
         if (!fileScanner.hasNext() || !fileScanner.next().equals(expectedVariable)) throw new IllegalArgumentException(INPUT_FILE_FORMAT_ERROR);
         try {
             String value = fileScanner.nextLine();

@@ -207,3 +207,29 @@ Set parameter Method to value 0
 Set parameter Presolve to value 0
 Set parameter Heuristics to value 0
 Warning: constraint name "Ore minime giornaliere" has a space
+
+Gurobi 11.0.0 (mac64[arm], Java) logging started Tue May 14 17:03:34 2024
+
+Set parameter Username
+Academic license - for non-commercial use only - expires 2025-03-01
+Set parameter Method to value 0
+Set parameter Presolve to value 0
+Set parameter Heuristics to value 0
+Warning: constraint name "Ore minime giornaliere" has a space
+
+Gurobi 11.0.0 (mac64[arm], Java) logging started Tue May 14 17:13:17 2024
+
+Set parameter Username
+Academic license - for non-commercial use only - expires 2025-03-01
+Set parameter Method to value 0
+Set parameter Presolve to value 0
+Set parameter Heuristics to value 0
+Warning: linear constraint 0 and linear constraint 1 have the same name "ore_minime_materia_totali"
+
+Gurobi 11.0.0 (mac64[arm], Java) logging started Tue May 14 17:37:40 2024
+
+Set parameter Username
+Academic license - for non-commercial use only - expires 2025-03-01
+Set parameter Method to value 0
+Set parameter Presolve to value 0
+Set parameter Heuristics to value 0

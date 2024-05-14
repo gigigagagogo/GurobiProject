@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Main {
     public static final String INPUT_FILE_FORMAT_ERROR = "Input file format error";
-    public static final int BIG_M = 24;
+    public static final int BIG_M_VINCOLO3 = 24;
     static Scanner fileScanner;
     static Scanner lineScanner;
     static int d; // inumero giorni
@@ -41,6 +41,7 @@ public class Main {
             aggiungiVincolo2(intero);
             aggiungiVincolo3(intero);
             aggiungiVincolo4(intero);
+            aggiungiVincolo5(intero);
 
             intero.write("logs/write.lp");
 
@@ -90,7 +91,7 @@ public class Main {
             for (int j = 0; j < d; j++) {
                 lhs.addTerm(1, x[i][j]);
             }
-            model.addConstr(lhs, GRB.GREATER_EQUAL, tau[i], "ore_minime_materia_totali");
+            model.addConstr(lhs, GRB.GREATER_EQUAL, tau[i], String.format("ore_minime_totali_materia_%d", i));
         }
     }
 
@@ -98,38 +99,46 @@ public class Main {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < d; j++) {
                 GRBLinExpr lhs = new GRBLinExpr();
-                GRBLinExpr rhs = new GRBLinExpr();
-                GRBLinExpr rhs2 = new GRBLinExpr();
                 lhs.addTerm(1, x[i][j]);
+                GRBLinExpr rhs = new GRBLinExpr();
                 rhs.addTerm(tau[i], y[i][j]);
-                rhs2.addTerm(BIG_M, y[i][j]);
-                model.addConstr(lhs, GRB.GREATER_EQUAL, rhs, "min_ore_giornaliere_materia");
-                model.addConstr(lhs, GRB.LESS_EQUAL, rhs2, "materia_se_studiata");
+                model.addConstr(lhs, GRB.GREATER_EQUAL, rhs, String.format("ore_minime_studio_materia_%d_nel_giorno_%d_se_studiata", i, j));
+            }
+        }
+    }
+
+    public static void aggiungiVincolo3(GRBModel model) throws GRBException {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < d; j++) {
+                GRBLinExpr lhs = new GRBLinExpr();
+                lhs.addTerm(1, x[i][j]);
+                GRBLinExpr rhs = new GRBLinExpr();
+                rhs.addTerm(BIG_M_VINCOLO3, y[i][j]);
+                model.addConstr(lhs, GRB.LESS_EQUAL, rhs, String.format("BIG_M_se_materia_%d_studiata_nel_giorno_%d", i, j));
             }
         }
     }
 
 
-    public static void aggiungiVincolo3(GRBModel model) throws GRBException{
+    public static void aggiungiVincolo4(GRBModel model) throws GRBException{
         for(int j = 0; j < d; j++){
             GRBLinExpr lhs = new GRBLinExpr();
             for(int i = 0; i < n; i++){
                 lhs.addTerm(1, y[i][j]);
             }
-            model.addConstr(lhs, GRB.LESS_EQUAL, l, "materie_max_giorno");
+            model.addConstr(lhs, GRB.LESS_EQUAL, l, String.format("materie_massime_studiate_nel_giorno_%d", j));
         }
     }
 
-    public static void aggiungiVincolo4(GRBModel model) throws GRBException{
+    public static void aggiungiVincolo5(GRBModel model) throws GRBException{
         for (int j = 0; j < d; j++) {
             GRBLinExpr lhs = new GRBLinExpr();
             for (int i = 0; i < n; i++) {
                 lhs.addTerm(1, x[i][j]);
             }
-            model.addConstr(lhs, GRB.LESS_EQUAL, tmax, "ore_max_giorno");
+            model.addConstr(lhs, GRB.LESS_EQUAL, tmax, String.format("ore_massime_studiate_nel_giorno_%d", j));
         }
     }
-
 
     public static int getVariableFromScanner(String expectedVariable) {
         if (!fileScanner.hasNext() || !fileScanner.next().equals(expectedVariable)) throw new IllegalArgumentException(INPUT_FILE_FORMAT_ERROR);

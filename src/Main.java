@@ -45,8 +45,9 @@ public class Main {
 
             intero.optimize();
 
-            intero.write("logs/write.lp");
+            stampaVincoliAttivi(intero);
 
+            intero.write("logs/write.lp");
 
             intero.dispose();
             env.dispose();
@@ -143,6 +144,19 @@ public class Main {
             model.addConstr(lhs, GRB.LESS_EQUAL, tmax, String.format("ore_massime_studiate_nel_giorno_%d", j));
         }
     }
+    public static void stampaVincoliAttivi(GRBModel model) throws GRBException{
+        int num_vincoli = model.get(GRB.IntAttr.NumConstrs);
+        int c=0;
+        System.out.println("---------------------------------------------------------------------");
+        for(int i = 0; i < num_vincoli; i++){
+            GRBConstr elenco_vincoli = model.getConstrs()[i];
+            if(elenco_vincoli.get(GRB.DoubleAttr.Slack) == 0.0){
+                System.out.println(i + ") Vincolo attivo: " + elenco_vincoli.get(GRB.StringAttr.ConstrName));
+                c++;
+            }
+        }
+        System.out.println("-----------------------Numero Vincoli Attivi: " + c + "-----------------------");
+    }
 
     public static int getVariableFromScanner(String expectedVariable) {
         if (!fileScanner.hasNext() || !fileScanner.next().equals(expectedVariable)) throw new IllegalArgumentException(INPUT_FILE_FORMAT_ERROR);
@@ -196,7 +210,6 @@ public class Main {
             a = getVariableFromScanner("a");
             b = getVariableFromScanner("b");
             c = getVariableFromScanner("c");
-
             fileScanner.close();
 
         } catch (Exception e) {

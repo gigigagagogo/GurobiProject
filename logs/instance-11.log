@@ -980,3 +980,564 @@ Solution count 2: 93 92
 
 Optimal solution found (tolerance 1.00e-04)
 Best objective 9.300000000000e+01, best bound 9.300000000000e+01, gap 0.0000%
+
+Gurobi 11.0.1 (linux64, Java) logging started mar 14 mag 2024, 23:39:02
+
+Set parameter Username
+Academic license - for non-commercial use only - expires 2025-02-25
+Set parameter Heuristics to value 0
+Gurobi Optimizer version 11.0.1 build v11.0.1rc0 (linux64 - "Fedora Linux 39 (Workstation Edition)")
+
+CPU model: AMD Ryzen 5 5500U with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 6 physical cores, 12 logical processors, using up to 12 threads
+
+Optimize a model with 347 rows, 308 columns and 1036 nonzeros
+Model fingerprint: 0xb61fa878
+Variable types: 0 continuous, 308 integer (154 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e+00, 1e+01]
+Presolve removed 70 rows and 14 columns
+Presolve time: 0.00s
+Presolved: 277 rows, 294 columns, 938 nonzeros
+Variable types: 0 continuous, 294 integer (154 binary)
+
+Root relaxation: objective 9.300000e+01, 128 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   93.00000    0    8          -   93.00000      -     -    0s
+     0     0   93.00000    0   10          -   93.00000      -     -    0s
+H    0     0                      92.0000000   93.00000  1.09%     -    0s
+H    0     0                      93.0000000   93.00000  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 3
+  Implied bound: 1
+  Clique: 1
+  MIR: 3
+  StrongCG: 1
+  Flow cover: 1
+  Zero half: 1
+  Relax-and-lift: 2
+
+Explored 1 nodes (224 simplex iterations) in 0.02 seconds (0.01 work units)
+Thread count was 12 (of 12 available processors)
+
+Solution count 2: 93 92 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.300000000000e+01, best bound 9.300000000000e+01, gap 0.0000%
+
+Gurobi 11.0.1 (linux64, Java) logging started mar 14 mag 2024, 23:39:23
+
+Set parameter Username
+Academic license - for non-commercial use only - expires 2025-02-25
+Set parameter Heuristics to value 0
+Gurobi Optimizer version 11.0.1 build v11.0.1rc0 (linux64 - "Fedora Linux 39 (Workstation Edition)")
+
+CPU model: AMD Ryzen 5 5500U with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 6 physical cores, 12 logical processors, using up to 12 threads
+
+Optimize a model with 347 rows, 308 columns and 1036 nonzeros
+Model fingerprint: 0xb61fa878
+Variable types: 0 continuous, 308 integer (154 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e+00, 1e+01]
+Presolve removed 70 rows and 14 columns
+Presolve time: 0.00s
+Presolved: 277 rows, 294 columns, 938 nonzeros
+Variable types: 0 continuous, 294 integer (154 binary)
+
+Root relaxation: objective 9.300000e+01, 128 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   93.00000    0    8          -   93.00000      -     -    0s
+     0     0   93.00000    0   10          -   93.00000      -     -    0s
+H    0     0                      92.0000000   93.00000  1.09%     -    0s
+H    0     0                      93.0000000   93.00000  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 3
+  Implied bound: 1
+  Clique: 1
+  MIR: 3
+  StrongCG: 1
+  Flow cover: 1
+  Zero half: 1
+  Relax-and-lift: 2
+
+Explored 1 nodes (224 simplex iterations) in 0.03 seconds (0.01 work units)
+Thread count was 12 (of 12 available processors)
+
+Solution count 2: 93 92 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.300000000000e+01, best bound 9.300000000000e+01, gap 0.0000%
+
+Gurobi 11.0.1 (linux64, Java) logging started mar 14 mag 2024, 23:39:25
+
+Set parameter Username
+Academic license - for non-commercial use only - expires 2025-02-25
+Set parameter Heuristics to value 0
+Gurobi Optimizer version 11.0.1 build v11.0.1rc0 (linux64 - "Fedora Linux 39 (Workstation Edition)")
+
+CPU model: AMD Ryzen 5 5500U with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 6 physical cores, 12 logical processors, using up to 12 threads
+
+Optimize a model with 347 rows, 308 columns and 1036 nonzeros
+Model fingerprint: 0xb61fa878
+Variable types: 0 continuous, 308 integer (154 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e+00, 1e+01]
+Presolve removed 70 rows and 14 columns
+Presolve time: 0.00s
+Presolved: 277 rows, 294 columns, 938 nonzeros
+Variable types: 0 continuous, 294 integer (154 binary)
+
+Root relaxation: objective 9.300000e+01, 128 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   93.00000    0    8          -   93.00000      -     -    0s
+     0     0   93.00000    0   10          -   93.00000      -     -    0s
+H    0     0                      92.0000000   93.00000  1.09%     -    0s
+H    0     0                      93.0000000   93.00000  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 3
+  Implied bound: 1
+  Clique: 1
+  MIR: 3
+  StrongCG: 1
+  Flow cover: 1
+  Zero half: 1
+  Relax-and-lift: 2
+
+Explored 1 nodes (224 simplex iterations) in 0.03 seconds (0.01 work units)
+Thread count was 12 (of 12 available processors)
+
+Solution count 2: 93 92 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.300000000000e+01, best bound 9.300000000000e+01, gap 0.0000%
+
+Gurobi 11.0.1 (linux64, Java) logging started mer 15 mag 2024, 00:36:16
+
+Set parameter Username
+Academic license - for non-commercial use only - expires 2025-02-25
+Set parameter Heuristics to value 0
+Gurobi Optimizer version 11.0.1 build v11.0.1rc0 (linux64 - "Fedora Linux 39 (Workstation Edition)")
+
+CPU model: AMD Ryzen 5 5500U with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 6 physical cores, 12 logical processors, using up to 12 threads
+
+Optimize a model with 347 rows, 308 columns and 1036 nonzeros
+Model fingerprint: 0xb61fa878
+Variable types: 0 continuous, 308 integer (154 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e+00, 1e+01]
+Presolve removed 70 rows and 14 columns
+Presolve time: 0.00s
+Presolved: 277 rows, 294 columns, 938 nonzeros
+Variable types: 0 continuous, 294 integer (154 binary)
+
+Root relaxation: objective 9.300000e+01, 128 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   93.00000    0    8          -   93.00000      -     -    0s
+     0     0   93.00000    0   10          -   93.00000      -     -    0s
+H    0     0                      92.0000000   93.00000  1.09%     -    0s
+H    0     0                      93.0000000   93.00000  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 3
+  Implied bound: 1
+  Clique: 1
+  MIR: 3
+  StrongCG: 1
+  Flow cover: 1
+  Zero half: 1
+  Relax-and-lift: 2
+
+Explored 1 nodes (224 simplex iterations) in 0.03 seconds (0.01 work units)
+Thread count was 12 (of 12 available processors)
+
+Solution count 2: 93 92 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.300000000000e+01, best bound 9.300000000000e+01, gap 0.0000%
+
+Gurobi 11.0.1 (linux64, Java) logging started mer 15 mag 2024, 00:42:26
+
+Set parameter Username
+Academic license - for non-commercial use only - expires 2025-02-25
+Set parameter Heuristics to value 0
+Gurobi Optimizer version 11.0.1 build v11.0.1rc0 (linux64 - "Fedora Linux 39 (Workstation Edition)")
+
+CPU model: AMD Ryzen 5 5500U with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 6 physical cores, 12 logical processors, using up to 12 threads
+
+Optimize a model with 347 rows, 308 columns and 1036 nonzeros
+Model fingerprint: 0xb61fa878
+Variable types: 0 continuous, 308 integer (154 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e+00, 1e+01]
+Presolve removed 70 rows and 14 columns
+Presolve time: 0.00s
+Presolved: 277 rows, 294 columns, 938 nonzeros
+Variable types: 0 continuous, 294 integer (154 binary)
+
+Root relaxation: objective 9.300000e+01, 128 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   93.00000    0    8          -   93.00000      -     -    0s
+     0     0   93.00000    0   10          -   93.00000      -     -    0s
+H    0     0                      92.0000000   93.00000  1.09%     -    0s
+H    0     0                      93.0000000   93.00000  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 3
+  Implied bound: 1
+  Clique: 1
+  MIR: 3
+  StrongCG: 1
+  Flow cover: 1
+  Zero half: 1
+  Relax-and-lift: 2
+
+Explored 1 nodes (224 simplex iterations) in 0.03 seconds (0.01 work units)
+Thread count was 12 (of 12 available processors)
+
+Solution count 2: 93 92 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.300000000000e+01, best bound 9.300000000000e+01, gap 0.0000%
+
+Gurobi 11.0.1 (linux64, Java) logging started mer 15 mag 2024, 00:43:28
+
+Set parameter Username
+Academic license - for non-commercial use only - expires 2025-02-25
+Set parameter Heuristics to value 0
+Gurobi Optimizer version 11.0.1 build v11.0.1rc0 (linux64 - "Fedora Linux 39 (Workstation Edition)")
+
+CPU model: AMD Ryzen 5 5500U with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 6 physical cores, 12 logical processors, using up to 12 threads
+
+Optimize a model with 347 rows, 308 columns and 1036 nonzeros
+Model fingerprint: 0xb61fa878
+Variable types: 0 continuous, 308 integer (154 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e+00, 1e+01]
+Presolve removed 70 rows and 14 columns
+Presolve time: 0.00s
+Presolved: 277 rows, 294 columns, 938 nonzeros
+Variable types: 0 continuous, 294 integer (154 binary)
+
+Root relaxation: objective 9.300000e+01, 128 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   93.00000    0    8          -   93.00000      -     -    0s
+     0     0   93.00000    0   10          -   93.00000      -     -    0s
+H    0     0                      92.0000000   93.00000  1.09%     -    0s
+H    0     0                      93.0000000   93.00000  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 3
+  Implied bound: 1
+  Clique: 1
+  MIR: 3
+  StrongCG: 1
+  Flow cover: 1
+  Zero half: 1
+  Relax-and-lift: 2
+
+Explored 1 nodes (224 simplex iterations) in 0.03 seconds (0.01 work units)
+Thread count was 12 (of 12 available processors)
+
+Solution count 2: 93 92 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.300000000000e+01, best bound 9.300000000000e+01, gap 0.0000%
+
+Gurobi 11.0.1 (linux64, Java) logging started mer 15 mag 2024, 00:43:59
+
+Set parameter Username
+Academic license - for non-commercial use only - expires 2025-02-25
+Set parameter Heuristics to value 0
+Gurobi Optimizer version 11.0.1 build v11.0.1rc0 (linux64 - "Fedora Linux 39 (Workstation Edition)")
+
+CPU model: AMD Ryzen 5 5500U with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 6 physical cores, 12 logical processors, using up to 12 threads
+
+Optimize a model with 347 rows, 308 columns and 1036 nonzeros
+Model fingerprint: 0xb61fa878
+Variable types: 0 continuous, 308 integer (154 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e+00, 1e+01]
+Presolve removed 70 rows and 14 columns
+Presolve time: 0.00s
+Presolved: 277 rows, 294 columns, 938 nonzeros
+Variable types: 0 continuous, 294 integer (154 binary)
+
+Root relaxation: objective 9.300000e+01, 128 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   93.00000    0    8          -   93.00000      -     -    0s
+     0     0   93.00000    0   10          -   93.00000      -     -    0s
+H    0     0                      92.0000000   93.00000  1.09%     -    0s
+H    0     0                      93.0000000   93.00000  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 3
+  Implied bound: 1
+  Clique: 1
+  MIR: 3
+  StrongCG: 1
+  Flow cover: 1
+  Zero half: 1
+  Relax-and-lift: 2
+
+Explored 1 nodes (224 simplex iterations) in 0.03 seconds (0.01 work units)
+Thread count was 12 (of 12 available processors)
+
+Solution count 2: 93 92 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.300000000000e+01, best bound 9.300000000000e+01, gap 0.0000%
+
+Gurobi 11.0.1 (linux64, Java) logging started mer 15 mag 2024, 00:45:33
+
+Set parameter Username
+Academic license - for non-commercial use only - expires 2025-02-25
+Set parameter Heuristics to value 0
+Gurobi Optimizer version 11.0.1 build v11.0.1rc0 (linux64 - "Fedora Linux 39 (Workstation Edition)")
+
+CPU model: AMD Ryzen 5 5500U with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 6 physical cores, 12 logical processors, using up to 12 threads
+
+Optimize a model with 347 rows, 308 columns and 1036 nonzeros
+Model fingerprint: 0xb61fa878
+Variable types: 0 continuous, 308 integer (154 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e+00, 1e+01]
+Presolve removed 70 rows and 14 columns
+Presolve time: 0.00s
+Presolved: 277 rows, 294 columns, 938 nonzeros
+Variable types: 0 continuous, 294 integer (154 binary)
+
+Root relaxation: objective 9.300000e+01, 128 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   93.00000    0    8          -   93.00000      -     -    0s
+     0     0   93.00000    0   10          -   93.00000      -     -    0s
+H    0     0                      92.0000000   93.00000  1.09%     -    0s
+H    0     0                      93.0000000   93.00000  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 3
+  Implied bound: 1
+  Clique: 1
+  MIR: 3
+  StrongCG: 1
+  Flow cover: 1
+  Zero half: 1
+  Relax-and-lift: 2
+
+Explored 1 nodes (224 simplex iterations) in 0.02 seconds (0.01 work units)
+Thread count was 12 (of 12 available processors)
+
+Solution count 2: 93 92 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.300000000000e+01, best bound 9.300000000000e+01, gap 0.0000%
+
+Gurobi 11.0.1 (linux64, Java) logging started mer 15 mag 2024, 00:46:36
+
+Set parameter Username
+Academic license - for non-commercial use only - expires 2025-02-25
+Set parameter Heuristics to value 0
+Gurobi Optimizer version 11.0.1 build v11.0.1rc0 (linux64 - "Fedora Linux 39 (Workstation Edition)")
+
+CPU model: AMD Ryzen 5 5500U with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 6 physical cores, 12 logical processors, using up to 12 threads
+
+Optimize a model with 347 rows, 308 columns and 1036 nonzeros
+Model fingerprint: 0xb61fa878
+Variable types: 0 continuous, 308 integer (154 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e+00, 1e+01]
+Presolve removed 70 rows and 14 columns
+Presolve time: 0.00s
+Presolved: 277 rows, 294 columns, 938 nonzeros
+Variable types: 0 continuous, 294 integer (154 binary)
+
+Root relaxation: objective 9.300000e+01, 128 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   93.00000    0    8          -   93.00000      -     -    0s
+     0     0   93.00000    0   10          -   93.00000      -     -    0s
+H    0     0                      92.0000000   93.00000  1.09%     -    0s
+H    0     0                      93.0000000   93.00000  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 3
+  Implied bound: 1
+  Clique: 1
+  MIR: 3
+  StrongCG: 1
+  Flow cover: 1
+  Zero half: 1
+  Relax-and-lift: 2
+
+Explored 1 nodes (224 simplex iterations) in 0.03 seconds (0.01 work units)
+Thread count was 12 (of 12 available processors)
+
+Solution count 2: 93 92 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.300000000000e+01, best bound 9.300000000000e+01, gap 0.0000%
+
+Gurobi 11.0.1 (linux64, Java) logging started mer 15 mag 2024, 00:47:11
+
+Set parameter Username
+Academic license - for non-commercial use only - expires 2025-02-25
+Set parameter Heuristics to value 0
+Gurobi Optimizer version 11.0.1 build v11.0.1rc0 (linux64 - "Fedora Linux 39 (Workstation Edition)")
+
+CPU model: AMD Ryzen 5 5500U with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 6 physical cores, 12 logical processors, using up to 12 threads
+
+Optimize a model with 347 rows, 308 columns and 1036 nonzeros
+Model fingerprint: 0xb61fa878
+Variable types: 0 continuous, 308 integer (154 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e+00, 1e+01]
+Presolve removed 70 rows and 14 columns
+Presolve time: 0.00s
+Presolved: 277 rows, 294 columns, 938 nonzeros
+Variable types: 0 continuous, 294 integer (154 binary)
+
+Root relaxation: objective 9.300000e+01, 128 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   93.00000    0    8          -   93.00000      -     -    0s
+     0     0   93.00000    0   10          -   93.00000      -     -    0s
+H    0     0                      92.0000000   93.00000  1.09%     -    0s
+H    0     0                      93.0000000   93.00000  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 3
+  Implied bound: 1
+  Clique: 1
+  MIR: 3
+  StrongCG: 1
+  Flow cover: 1
+  Zero half: 1
+  Relax-and-lift: 2
+
+Explored 1 nodes (224 simplex iterations) in 0.02 seconds (0.01 work units)
+Thread count was 12 (of 12 available processors)
+
+Solution count 2: 93 92 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.300000000000e+01, best bound 9.300000000000e+01, gap 0.0000%
+
+Gurobi 11.0.1 (linux64, Java) logging started mer 15 mag 2024, 00:47:16
+
+Set parameter Username
+Academic license - for non-commercial use only - expires 2025-02-25
+Set parameter Heuristics to value 0
+Gurobi Optimizer version 11.0.1 build v11.0.1rc0 (linux64 - "Fedora Linux 39 (Workstation Edition)")
+
+CPU model: AMD Ryzen 5 5500U with Radeon Graphics, instruction set [SSE2|AVX|AVX2]
+Thread count: 6 physical cores, 12 logical processors, using up to 12 threads
+
+Optimize a model with 347 rows, 308 columns and 1036 nonzeros
+Model fingerprint: 0xb61fa878
+Variable types: 0 continuous, 308 integer (154 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e+00, 1e+01]
+Presolve removed 70 rows and 14 columns
+Presolve time: 0.00s
+Presolved: 277 rows, 294 columns, 938 nonzeros
+Variable types: 0 continuous, 294 integer (154 binary)
+
+Root relaxation: objective 9.300000e+01, 128 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   93.00000    0    8          -   93.00000      -     -    0s
+     0     0   93.00000    0   10          -   93.00000      -     -    0s
+H    0     0                      92.0000000   93.00000  1.09%     -    0s
+H    0     0                      93.0000000   93.00000  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 3
+  Implied bound: 1
+  Clique: 1
+  MIR: 3
+  StrongCG: 1
+  Flow cover: 1
+  Zero half: 1
+  Relax-and-lift: 2
+
+Explored 1 nodes (224 simplex iterations) in 0.04 seconds (0.01 work units)
+Thread count was 12 (of 12 available processors)
+
+Solution count 2: 93 92 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.300000000000e+01, best bound 9.300000000000e+01, gap 0.0000%

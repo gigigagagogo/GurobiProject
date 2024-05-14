@@ -90,7 +90,7 @@ public class Main {
             for (int j = 0; j < d; j++) {
                 lhs.addTerm(1, x[i][j]);
             }
-            model.addConstr(lhs, GRB.GREATER_EQUAL, tau[i], "Ore minime giornaliere");
+            model.addConstr(lhs, GRB.GREATER_EQUAL, tau[i], "ore_minime_materia_totali");
         }
     }
 
@@ -103,8 +103,8 @@ public class Main {
                 lhs.addTerm(1, x[i][j]);
                 rhs.addTerm(tau[i], y[i][j]);
                 rhs2.addTerm(BIG_M, y[i][j]);
-                model.addConstr(lhs, GRB.GREATER_EQUAL, rhs, "Ore minime per materia al giorno, se studiata");
-                model.addConstr(lhs, GRB.LESS_EQUAL, rhs2, "Materia studiata o no | BIG_M");
+                model.addConstr(lhs, GRB.GREATER_EQUAL, rhs, "min_ore_giornaliere_materia");
+                model.addConstr(lhs, GRB.LESS_EQUAL, rhs2, "materia_se_studiata");
             }
         }
     }
@@ -116,7 +116,7 @@ public class Main {
             for(int i = 0; i < n; i++){
                 lhs.addTerm(1, y[i][j]);
             }
-            model.addConstr(lhs, GRB.LESS_EQUAL, l, "Numero max di materie al giorno");
+            model.addConstr(lhs, GRB.LESS_EQUAL, l, "materie_max_giorno");
         }
     }
 
@@ -126,7 +126,7 @@ public class Main {
             for (int i = 0; i < n; i++) {
                 lhs.addTerm(1, x[i][j]);
             }
-            model.addConstr(lhs, GRB.LESS_EQUAL, tmax, "Ore max giornaliere");
+            model.addConstr(lhs, GRB.LESS_EQUAL, tmax, "ore_max_giorno");
         }
     }
 

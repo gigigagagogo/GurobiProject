@@ -5,37 +5,37 @@ Maximize
 Subject To
  ore_minime_totali_materia_0: x_0_0 + x_0_1 + x_0_2 + x_0_3 + x_0_4 + x_0_5
    + x_0_6 + x_0_7 + x_0_8 + x_0_9 + x_0_10 + x_0_11 + x_0_12 + x_0_13
-   >= 3
+   >= 6
  ore_minime_totali_materia_1: x_1_0 + x_1_1 + x_1_2 + x_1_3 + x_1_4 + x_1_5
    + x_1_6 + x_1_7 + x_1_8 + x_1_9 + x_1_10 + x_1_11 + x_1_12 + x_1_13
-   >= 0
+   >= 10
  ore_minime_totali_materia_2: x_2_0 + x_2_1 + x_2_2 + x_2_3 + x_2_4 + x_2_5
    + x_2_6 + x_2_7 + x_2_8 + x_2_9 + x_2_10 + x_2_11 + x_2_12 + x_2_13
-   >= 3
+   >= 2
  ore_minime_totali_materia_3: x_3_0 + x_3_1 + x_3_2 + x_3_3 + x_3_4 + x_3_5
    + x_3_6 + x_3_7 + x_3_8 + x_3_9 + x_3_10 + x_3_11 + x_3_12 + x_3_13
-   >= 1
+   >= 2
  ore_minime_totali_materia_4: x_4_0 + x_4_1 + x_4_2 + x_4_3 + x_4_4 + x_4_5
    + x_4_6 + x_4_7 + x_4_8 + x_4_9 + x_4_10 + x_4_11 + x_4_12 + x_4_13
-   >= 1
+   >= 10
  ore_minime_totali_materia_5: x_5_0 + x_5_1 + x_5_2 + x_5_3 + x_5_4 + x_5_5
    + x_5_6 + x_5_7 + x_5_8 + x_5_9 + x_5_10 + x_5_11 + x_5_12 + x_5_13
-   >= 0
+   >= 2
  ore_minime_totali_materia_6: x_6_0 + x_6_1 + x_6_2 + x_6_3 + x_6_4 + x_6_5
    + x_6_6 + x_6_7 + x_6_8 + x_6_9 + x_6_10 + x_6_11 + x_6_12 + x_6_13
-   >= 2
+   >= 3
  ore_minime_totali_materia_7: x_7_0 + x_7_1 + x_7_2 + x_7_3 + x_7_4 + x_7_5
    + x_7_6 + x_7_7 + x_7_8 + x_7_9 + x_7_10 + x_7_11 + x_7_12 + x_7_13
-   >= 1
+   >= 8
  ore_minime_totali_materia_8: x_8_0 + x_8_1 + x_8_2 + x_8_3 + x_8_4 + x_8_5
    + x_8_6 + x_8_7 + x_8_8 + x_8_9 + x_8_10 + x_8_11 + x_8_12 + x_8_13
-   >= 1
+   >= 3
  ore_minime_totali_materia_9: x_9_0 + x_9_1 + x_9_2 + x_9_3 + x_9_4 + x_9_5
    + x_9_6 + x_9_7 + x_9_8 + x_9_9 + x_9_10 + x_9_11 + x_9_12 + x_9_13
-   >= 0
+   >= 2
  ore_minime_totali_materia_10: x_10_0 + x_10_1 + x_10_2 + x_10_3 + x_10_4
    + x_10_5 + x_10_6 + x_10_7 + x_10_8 + x_10_9 + x_10_10 + x_10_11
-   + x_10_12 + x_10_13 >= 1
+   + x_10_12 + x_10_13 >= 6
  ore_minime_studio_materia_0_nel_giorno_0_se_studiata: x_0_0 - 3 y_0_0
    >= 0
  ore_minime_studio_materia_0_nel_giorno_1_se_studiata: x_0_1 - 3 y_0_1
@@ -444,6 +444,34 @@ Subject To
    + y_4_12 + y_5_12 + y_6_12 + y_7_12 + y_8_12 + y_9_12 + y_10_12 <= 2
  materie_massime_studiate_nel_giorno_13: y_0_13 + y_1_13 + y_2_13 + y_3_13
    + y_4_13 + y_5_13 + y_6_13 + y_7_13 + y_8_13 + y_9_13 + y_10_13 <= 2
+ ore_massime_studiate_nel_giorno_0: x_0_0 + x_1_0 + x_2_0 + x_3_0 + x_4_0
+   + x_5_0 + x_6_0 + x_7_0 + x_8_0 + x_9_0 + x_10_0 <= 10
+ ore_massime_studiate_nel_giorno_1: x_0_1 + x_1_1 + x_2_1 + x_3_1 + x_4_1
+   + x_5_1 + x_6_1 + x_7_1 + x_8_1 + x_9_1 + x_10_1 <= 10
+ ore_massime_studiate_nel_giorno_2: x_0_2 + x_1_2 + x_2_2 + x_3_2 + x_4_2
+   + x_5_2 + x_6_2 + x_7_2 + x_8_2 + x_9_2 + x_10_2 <= 10
+ ore_massime_studiate_nel_giorno_3: x_0_3 + x_1_3 + x_2_3 + x_3_3 + x_4_3
+   + x_5_3 + x_6_3 + x_7_3 + x_8_3 + x_9_3 + x_10_3 <= 10
+ ore_massime_studiate_nel_giorno_4: x_0_4 + x_1_4 + x_2_4 + x_3_4 + x_4_4
+   + x_5_4 + x_6_4 + x_7_4 + x_8_4 + x_9_4 + x_10_4 <= 10
+ ore_massime_studiate_nel_giorno_5: x_0_5 + x_1_5 + x_2_5 + x_3_5 + x_4_5
+   + x_5_5 + x_6_5 + x_7_5 + x_8_5 + x_9_5 + x_10_5 <= 10
+ ore_massime_studiate_nel_giorno_6: x_0_6 + x_1_6 + x_2_6 + x_3_6 + x_4_6
+   + x_5_6 + x_6_6 + x_7_6 + x_8_6 + x_9_6 + x_10_6 <= 10
+ ore_massime_studiate_nel_giorno_7: x_0_7 + x_1_7 + x_2_7 + x_3_7 + x_4_7
+   + x_5_7 + x_6_7 + x_7_7 + x_8_7 + x_9_7 + x_10_7 <= 10
+ ore_massime_studiate_nel_giorno_8: x_0_8 + x_1_8 + x_2_8 + x_3_8 + x_4_8
+   + x_5_8 + x_6_8 + x_7_8 + x_8_8 + x_9_8 + x_10_8 <= 10
+ ore_massime_studiate_nel_giorno_9: x_0_9 + x_1_9 + x_2_9 + x_3_9 + x_4_9
+   + x_5_9 + x_6_9 + x_7_9 + x_8_9 + x_9_9 + x_10_9 <= 10
+ ore_massime_studiate_nel_giorno_10: x_0_10 + x_1_10 + x_2_10 + x_3_10
+   + x_4_10 + x_5_10 + x_6_10 + x_7_10 + x_8_10 + x_9_10 + x_10_10 <= 10
+ ore_massime_studiate_nel_giorno_11: x_0_11 + x_1_11 + x_2_11 + x_3_11
+   + x_4_11 + x_5_11 + x_6_11 + x_7_11 + x_8_11 + x_9_11 + x_10_11 <= 10
+ ore_massime_studiate_nel_giorno_12: x_0_12 + x_1_12 + x_2_12 + x_3_12
+   + x_4_12 + x_5_12 + x_6_12 + x_7_12 + x_8_12 + x_9_12 + x_10_12 <= 10
+ ore_massime_studiate_nel_giorno_13: x_0_13 + x_1_13 + x_2_13 + x_3_13
+   + x_4_13 + x_5_13 + x_6_13 + x_7_13 + x_8_13 + x_9_13 + x_10_13 <= 10
 Bounds
 Binaries
  y_0_0 y_0_1 y_0_2 y_0_3 y_0_4 y_0_5 y_0_6 y_0_7 y_0_8 y_0_9 y_0_10 y_0_11

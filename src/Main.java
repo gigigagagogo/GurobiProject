@@ -43,8 +43,13 @@ public class Main {
             aggiungiVincolo4(intero);
             aggiungiVincolo5(intero);
 
+            intero.optimize();
+
             intero.write("logs/write.lp");
 
+
+            intero.dispose();
+            env.dispose();
 
         } catch (GRBException e) {
             e.printStackTrace();
@@ -53,8 +58,8 @@ public class Main {
     }
 
     private static void impostaParametri(GRBEnv env) throws GRBException {
-        env.set(GRB.IntParam.Method, 0);
-        env.set(GRB.IntParam.Presolve, 0);
+        env.set(GRB.IntParam.Method, -1);
+        env.set(GRB.IntParam.Presolve, -1);
         env.set(GRB.DoubleParam.Heuristics, 0);
     }
 
@@ -91,7 +96,7 @@ public class Main {
             for (int j = 0; j < d; j++) {
                 lhs.addTerm(1, x[i][j]);
             }
-            model.addConstr(lhs, GRB.GREATER_EQUAL, tau[i], String.format("ore_minime_totali_materia_%d", i));
+            model.addConstr(lhs, GRB.GREATER_EQUAL, t[i], String.format("ore_minime_totali_materia_%d", i));
         }
     }
 
@@ -118,7 +123,6 @@ public class Main {
             }
         }
     }
-
 
     public static void aggiungiVincolo4(GRBModel model) throws GRBException{
         for(int j = 0; j < d; j++){

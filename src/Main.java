@@ -24,10 +24,10 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            String filename = "input/instance-11.txt";
-            parseInputFile(filename);
+            String filename = "instance-11";
+            parseInputFile("input/" + filename + ".txt");
 
-            GRBEnv env = new GRBEnv("logs/instance-11.log");
+            GRBEnv env = new GRBEnv("logs/" + filename + ".log");
             impostaParametri(env);
 
             GRBModel intero = new GRBModel(env);
@@ -52,7 +52,7 @@ public class Main {
             System.out.print("[1.a] ");
             stampaVariabili(intero);
 
-            GRBModel rilassato = intero.relax();
+            GRBModel rilassato = new GRBModel(intero.relax());
             rilassato.set(GRB.StringAttr.ModelName, "rilassato");
             rilassato.optimize();
 
@@ -66,18 +66,25 @@ public class Main {
             System.out.print("[1.b] ");
             stampaOttimoCoincidente(intero, rilassato);
 
+            GRBModel interoStar = new GRBModel(intero);
+            interoStar.set(GRB.StringAttr.ModelName, "interoStar");
+
+            aggiungiVincolo6(interoStar);
+            aggiungiVincolo7(interoStar, b);
+            aggiungiVincolo7(interoStar, c);
+
+            interoStar.optimize();
+
             System.out.printf("------------------------------ Modello: %s ------------------------------\n", intero.get(GRB.StringAttr.ModelName));
-            aggiungiVincolo6(intero);
-            aggiungiVincolo7(intero, b);
-            aggiungiVincolo7(intero, c);
-            intero.optimize();
             System.out.print("[2] ");
-            stampaValoreOttimo(intero);
+            stampaValoreOttimo(interoStar);
 
 
             intero.write("logs/write.lp");
 
             intero.dispose();
+            rilassato.dispose();
+            interoStar.dispose();
             env.dispose();
 
         } catch (GRBException e) {
@@ -200,9 +207,9 @@ public class Main {
     public static void aggiungiVincolo1(GRBModel model) throws GRBException {
         for (int i = 0; i < n; i++) {
             GRBLinExpr lhs = new GRBLinExpr();
-            for (int j = 0; j < d; j++) {
+            for (int j = 0; j < d; j++)
                 lhs.addTerm(1, x[i][j]);
-            }
+
             model.addConstr(lhs, GRB.GREATER_EQUAL, t[i], String.format("ore_minime_totali_materia_%d", i));
         }
     }
@@ -232,11 +239,11 @@ public class Main {
     }
 
     public static void aggiungiVincolo4(GRBModel model) throws GRBException {
-        for(int j = 0; j < d; j++){
+        for (int j = 0; j < d; j++) {
             GRBLinExpr lhs = new GRBLinExpr();
-            for(int i = 0; i < n; i++){
+            for(int i = 0; i < n; i++)
                 lhs.addTerm(1, y[i][j]);
-            }
+
             model.addConstr(lhs, GRB.LESS_EQUAL, l, String.format("materie_massime_studiate_nel_giorno_%d", j));
         }
     }
@@ -244,9 +251,9 @@ public class Main {
     public static void aggiungiVincolo5(GRBModel model) throws GRBException {
         for (int j = 0; j < d; j++) {
             GRBLinExpr lhs = new GRBLinExpr();
-            for (int i = 0; i < n; i++) {
+            for (int i = 0; i < n; i++)
                 lhs.addTerm(1, x[i][j]);
-            }
+
             model.addConstr(lhs, GRB.LESS_EQUAL, tmax, String.format("ore_massime_studiate_nel_giorno_%d", j));
         }
     }
@@ -255,12 +262,9 @@ public class Main {
         for (int i = 0; i < n; i++) {
             for (int j = 2; j < d; j++) {
                 GRBLinExpr lhs = new GRBLinExpr();
-                for (int m = j; m > j - 3; m--) {
+                for (int m = j; m > j - 3; m--)
                     lhs.addTerm(1, y[i][m]);
-                }
-//                lhs.addTerm(1, y[i][j-2]);
-//                lhs.addTerm(1, y[i][j-1]);
-//                lhs.addTerm(1, y[i][j]);
+
                 model.addConstr(lhs, GRB.LESS_EQUAL, 2, String.format("materia_%d_non_studiata_3_giorni_di_fila_dal_giorno_%d", i, j-2));
             }
 
@@ -271,19 +275,18 @@ public class Main {
         for (int j = 1; j < d; j++) {
             GRBLinExpr lhs = new GRBLinExpr();
             GRBLinExpr rhs = new GRBLinExpr();
-            lhs.addTerm(1, y[i][j]);
+            lhs.addTerm(1, y[i][j-1]);
             rhs.addConstant(1);
-            rhs.addTerm(-1, y[a][j-1]);
+            rhs.addTerm(-1, y[a][j]);
             model.addConstr(lhs, GRB.LESS_EQUAL, rhs, String.format("materia_%d_studiata_giorno_%d_se_giorno_%d_non_studiata_%d", a, j, j-1, i));
         }
-
     }
 
     public static void impostaParametri(GRBEnv env) throws GRBException {
-        env.set(GRB.IntParam.Method, 0);
-        env.set(GRB.IntParam.Presolve, 0);
+        env.set(GRB.IntParam.Method, -1);
+        env.set(GRB.IntParam.Presolve, -1);
         env.set(GRB.DoubleParam.Heuristics, 0);
-        env.set(GRB.IntParam.LogToConsole, 0);
+        env.set(GRB.IntParam.LogToConsole, 1);
     }
 
     public static GRBVar[][] aggiungiVariabiliIntere(GRBModel model) throws GRBException {

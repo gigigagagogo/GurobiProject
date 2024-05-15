@@ -45,15 +45,11 @@ public class Main {
 
             intero.optimize();
 
-            stampaVincoliAttivi(intero);
-
-            if(controlloSoluzioneDegenere(intero)){
-                System.out.println("Soluzione degenere");
-            }else{
-                System.out.println("Soluzione non degenere");
-            }
+            stampaValoreOttimo(intero);
+            stampaVariabili(intero);
 
             intero.write("logs/write.lp");
+
             intero.dispose();
             env.dispose();
 
@@ -64,9 +60,10 @@ public class Main {
     }
 
     private static void impostaParametri(GRBEnv env) throws GRBException {
-        env.set(GRB.IntParam.Method, -1);
-        env.set(GRB.IntParam.Presolve, -1);
+        env.set(GRB.IntParam.Method, 0);
+        env.set(GRB.IntParam.Presolve, 0);
         env.set(GRB.DoubleParam.Heuristics, 0);
+        //env.set(GRB.IntParam.LogToConsole, 0);
     }
 
     private static GRBVar[][] aggiungiVariabiliIntere(GRBModel model) throws GRBException {
@@ -94,6 +91,22 @@ public class Main {
             expr.addTerm(1, x[k][j]);
 
         model.setObjective(expr, GRB.MAXIMIZE);
+    }
+
+    public static void stampaVariabili(GRBModel model) throws GRBException {
+
+        System.out.println("Variabili non di slack/surplus:");
+        for(GRBVar v: model.getVars())
+            System.out.printf("\t%s = %s\n", v.get(GRB.StringAttr.VarName), v.get(GRB.DoubleAttr.X));
+
+        System.out.println("Variabili di slack/surplus:");
+        for(GRBConstr c: model.getConstrs())
+            System.out.printf("\t%s = %s\n", c.get(GRB.StringAttr.ConstrName), c.get(GRB.DoubleAttr.Slack));
+
+    }
+
+    public static void stampaValoreOttimo(GRBModel model) throws GRBException {
+        System.out.printf("Valore ottimo della funzione obiettivo: %s\n", model.get(GRB.DoubleAttr.ObjVal));
     }
 
     public static void aggiungiVincolo1(GRBModel model) throws GRBException {
@@ -150,25 +163,21 @@ public class Main {
         }
     }
     public static void stampaVincoliAttivi(GRBModel model) throws GRBException{
-        int num_vincoli = model.get(GRB.IntAttr.NumConstrs);
-        int c = 0;
-        System.out.println("---------------------------------------------------------------------");
-        for(int i = 0; i < num_vincoli; i++){
-            GRBConstr elenco_vincoli = model.getConstrs()[i];
-            if(elenco_vincoli.get(GRB.DoubleAttr.Slack) <= 1e-6){
-                System.out.println(i + ") Vincolo attivo: " + elenco_vincoli.get(GRB.StringAttr.ConstrName));
-                c++;
+        int count = 0;
+        System.out.println("Vincoli attivi:");
+        for (GRBConstr c: model.getConstrs())
+            if (Math.abs(c.get(GRB.DoubleAttr.Slack)) < 1e-6) {
+                System.out.printf("\t%d - %s\n", c.index(), c.get(GRB.StringAttr.ConstrName));
+                count++;
             }
-        }
-        System.out.println("-----------------------Numero Vincoli Attivi: " + c + "-----------------------");
+        System.out.printf("\t(totale %d)", count);
     }
 
-    public static boolean controlloSoluzioneDegenere(GRBModel model) throws GRBException{
-        for(GRBVar var: model.getVars()){
-            if(var.get(GRB.IntAttr.VBasis) == 0 && var.get(GRB.DoubleAttr.X) <= 1e-6) {
+    static public boolean controlloSoluzioneDegenere(GRBModel model) throws GRBException{
+        for (GRBVar v: model.getVars())
+            if (v.get(GRB.IntAttr.VBasis) == GRB.BASIC && Math.abs(v.get(GRB.DoubleAttr.Slack)) < 1e-6)
                 return true;
-            }
-        }
+
         return false;
     }
 
@@ -224,6 +233,7 @@ public class Main {
             a = getVariableFromScanner("a");
             b = getVariableFromScanner("b");
             c = getVariableFromScanner("c");
+
             fileScanner.close();
 
         } catch (Exception e) {

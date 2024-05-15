@@ -48,6 +48,12 @@ public class Main {
             stampaValoreOttimo(intero);
             stampaVariabili(intero);
 
+            GRBModel rilassato = intero.relax();
+            rilassato.optimize();
+            stampaVincoliAttivi(rilassato);
+            stampaDegenere(rilassato);
+            stampaSoluzioneUnica(rilassato);
+
             intero.write("logs/write.lp");
 
             intero.dispose();
@@ -59,54 +65,90 @@ public class Main {
         }
     }
 
-    private static void impostaParametri(GRBEnv env) throws GRBException {
-        env.set(GRB.IntParam.Method, 0);
-        env.set(GRB.IntParam.Presolve, 0);
-        env.set(GRB.DoubleParam.Heuristics, 0);
-        //env.set(GRB.IntParam.LogToConsole, 0);
+    public static void stampaSoluzioneUnica(GRBModel model) throws GRBException {
+        System.out.printf("La soluzione ottima %sè unica",
+                isSoluzioneOttimaUnica(model) ? "" : "non ");
     }
 
-    private static GRBVar[][] aggiungiVariabiliIntere(GRBModel model) throws GRBException {
-        GRBVar[][] x = new GRBVar[n][d];
-        for (int i = 0; i < n; i++)
-            for (int j = 0; j < d; j++)
-                x[i][j] = model.addVar(0, GRB.INFINITY, 0, GRB.INTEGER, "x_" + i + "_" + j);
+    public static boolean isSoluzioneOttimaUnica(GRBModel model) throws GRBException {
+//        for (GRBVar v: model.getVars())
+//            if (Math.abs(v.get(GRB.DoubleAttr.RHS)) < 1e-6)
+//                return false;
+        for (GRBConstr c: model.getConstrs())
+            if (Math.abs(c.get(GRB.DoubleAttr.RHS)) < 1e-6)
+                return false;
 
-        return x;
+        return true;
     }
 
-    private static GRBVar[][] aggiungiVariabiliBinarie(GRBModel model) throws GRBException {
-        GRBVar[][] y = new GRBVar[n][d];
-        for (int i = 0; i < n; i++)
-            for (int j = 0; j < d; j++)
-                y[i][j] = model.addVar(0, 1, 0, GRB.BINARY, "y_" + i + "_" + j);
+    public static void stampaDegenere(GRBModel model) throws GRBException {
+        ArrayList<GRBVar> variabiliDegenere = getVariabiliDegenere(model);
+        ArrayList<GRBConstr> constrDegenere = getConstrDegenere(model);
+        if (variabiliDegenere.isEmpty() && constrDegenere.isEmpty()) {
+            System.out.println("La soluzione trovata non è degenere");
+            return;
+        }
 
-        return y;
+        System.out.println("La soluzione trovata è degenere\nVariabili in base equivalenti a 0:");
+        for (GRBVar v: variabiliDegenere)
+            System.out.printf("\t%s\n", v.get(GRB.StringAttr.VarName));
+        for (GRBConstr c: constrDegenere)
+            System.out.printf("\t%s\n", c.get(GRB.StringAttr.ConstrName));
+        System.out.printf("\t(totale %d)\n", variabiliDegenere.size() + constrDegenere.size());
+
     }
 
-    private static void aggiungiFunzioneObiettivo(GRBModel model) throws GRBException
-    {
-        GRBLinExpr expr = new GRBLinExpr();
-        for (int j = 0; j < d; j++)
-            expr.addTerm(1, x[k][j]);
+    public static ArrayList<GRBVar> getVariabiliDegenere(GRBModel model) throws GRBException {
+        ArrayList<GRBVar> list = new ArrayList<>();
+        for (GRBVar v: model.getVars())
+            if (v.get(GRB.IntAttr.VBasis) == GRB.BASIC && Math.abs(v.get(GRB.DoubleAttr.X)) < 1e-6)
+                list.add(v);
 
-        model.setObjective(expr, GRB.MAXIMIZE);
+        return list;
+    }
+
+    public static ArrayList<GRBConstr> getConstrDegenere(GRBModel model) throws GRBException {
+        ArrayList<GRBConstr> list = new ArrayList<>();
+        for (GRBConstr c: model.getConstrs())
+            if (c.get(GRB.IntAttr.CBasis) == GRB.BASIC && Math.abs(c.get(GRB.DoubleAttr.Slack)) < 1e-6)
+                list.add(c);
+
+        return list;
     }
 
     public static void stampaVariabili(GRBModel model) throws GRBException {
-
         System.out.println("Variabili non di slack/surplus:");
-        for(GRBVar v: model.getVars())
+        for (GRBVar v: model.getVars())
             System.out.printf("\t%s = %s\n", v.get(GRB.StringAttr.VarName), v.get(GRB.DoubleAttr.X));
 
         System.out.println("Variabili di slack/surplus:");
-        for(GRBConstr c: model.getConstrs())
+        for (GRBConstr c: model.getConstrs())
             System.out.printf("\t%s = %s\n", c.get(GRB.StringAttr.ConstrName), c.get(GRB.DoubleAttr.Slack));
 
     }
 
     public static void stampaValoreOttimo(GRBModel model) throws GRBException {
         System.out.printf("Valore ottimo della funzione obiettivo: %s\n", model.get(GRB.DoubleAttr.ObjVal));
+    }
+
+    public static void stampaVincoliAttivi(GRBModel model) throws GRBException {
+        int count = 0;
+        System.out.println("Vincoli attivi:");
+        for (GRBConstr c: model.getConstrs())
+            if (Math.abs(c.get(GRB.DoubleAttr.Slack)) < 1e-6) {
+                System.out.printf("\t%d - %s\n", c.index(), c.get(GRB.StringAttr.ConstrName));
+                count++;
+            }
+        System.out.printf("\t(totale %d)\n", count);
+    }
+
+    public static void aggiungiFunzioneObiettivo(GRBModel model) throws GRBException
+    {
+        GRBLinExpr expr = new GRBLinExpr();
+        for (int j = 0; j < d; j++)
+            expr.addTerm(1, x[k][j]);
+
+        model.setObjective(expr, GRB.MAXIMIZE);
     }
 
     public static void aggiungiVincolo1(GRBModel model) throws GRBException {
@@ -143,7 +185,7 @@ public class Main {
         }
     }
 
-    public static void aggiungiVincolo4(GRBModel model) throws GRBException{
+    public static void aggiungiVincolo4(GRBModel model) throws GRBException {
         for(int j = 0; j < d; j++){
             GRBLinExpr lhs = new GRBLinExpr();
             for(int i = 0; i < n; i++){
@@ -153,7 +195,7 @@ public class Main {
         }
     }
 
-    public static void aggiungiVincolo5(GRBModel model) throws GRBException{
+    public static void aggiungiVincolo5(GRBModel model) throws GRBException {
         for (int j = 0; j < d; j++) {
             GRBLinExpr lhs = new GRBLinExpr();
             for (int i = 0; i < n; i++) {
@@ -162,23 +204,30 @@ public class Main {
             model.addConstr(lhs, GRB.LESS_EQUAL, tmax, String.format("ore_massime_studiate_nel_giorno_%d", j));
         }
     }
-    public static void stampaVincoliAttivi(GRBModel model) throws GRBException{
-        int count = 0;
-        System.out.println("Vincoli attivi:");
-        for (GRBConstr c: model.getConstrs())
-            if (Math.abs(c.get(GRB.DoubleAttr.Slack)) < 1e-6) {
-                System.out.printf("\t%d - %s\n", c.index(), c.get(GRB.StringAttr.ConstrName));
-                count++;
-            }
-        System.out.printf("\t(totale %d)", count);
+
+    public static void impostaParametri(GRBEnv env) throws GRBException {
+        env.set(GRB.IntParam.Method, 0);
+        env.set(GRB.IntParam.Presolve, 0);
+        env.set(GRB.DoubleParam.Heuristics, 0);
+        //env.set(GRB.IntParam.LogToConsole, 0);
     }
 
-    static public boolean controlloSoluzioneDegenere(GRBModel model) throws GRBException{
-        for (GRBVar v: model.getVars())
-            if (v.get(GRB.IntAttr.VBasis) == GRB.BASIC && Math.abs(v.get(GRB.DoubleAttr.Slack)) < 1e-6)
-                return true;
+    public static GRBVar[][] aggiungiVariabiliIntere(GRBModel model) throws GRBException {
+        GRBVar[][] x = new GRBVar[n][d];
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < d; j++)
+                x[i][j] = model.addVar(0, GRB.INFINITY, 0, GRB.INTEGER, "x_" + i + "_" + j);
 
-        return false;
+        return x;
+    }
+
+    public static GRBVar[][] aggiungiVariabiliBinarie(GRBModel model) throws GRBException {
+        GRBVar[][] y = new GRBVar[n][d];
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < d; j++)
+                y[i][j] = model.addVar(0, 1, 0, GRB.BINARY, "y_" + i + "_" + j);
+
+        return y;
     }
 
     public static int getVariableFromScanner(String expectedVariable) {

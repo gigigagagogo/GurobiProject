@@ -31,6 +31,7 @@ public class Main {
             impostaParametri(env);
 
             GRBModel intero = new GRBModel(env);
+            intero.set(GRB.StringAttr.ModelName, "intero");
 
             x = aggiungiVariabiliIntere(intero);
             y = aggiungiVariabiliBinarie(intero);
@@ -45,14 +46,25 @@ public class Main {
 
             intero.optimize();
 
+            System.out.printf("------------------------------ Modello: %s ------------------------------\n", intero.get(GRB.StringAttr.ModelName));
+            System.out.print("[1.a] ");
             stampaValoreOttimo(intero);
+            System.out.print("[1.a] ");
             stampaVariabili(intero);
 
             GRBModel rilassato = intero.relax();
+            rilassato.set(GRB.StringAttr.ModelName, "rilassato");
             rilassato.optimize();
+
+            System.out.printf("------------------------------ Modello: %s ------------------------------\n", rilassato.get(GRB.StringAttr.ModelName));
+            System.out.print("[1.b] ");
             stampaVincoliAttivi(rilassato);
+            System.out.print("[1.b] ");
             stampaDegenere(rilassato);
+            System.out.print("[1.b] ");
             stampaSoluzioneUnica(rilassato);
+            System.out.print("[1.b] ");
+            stampaOttimoCoincidente(intero, rilassato);
 
             intero.write("logs/write.lp");
 
@@ -65,17 +77,42 @@ public class Main {
         }
     }
 
+    public static void stampaOttimoCoincidente(GRBModel model1, GRBModel model2) throws GRBException {
+        System.out.printf("Le soluzioni ottime di %s e %s %scoincidono",
+                model1.get(GRB.StringAttr.ModelName),
+                model2.get(GRB.StringAttr.ModelName),
+                isOttimoCoincidente(model1, model2) ? "" : "non ");
+    }
+    public static boolean isOttimoCoincidente(GRBModel model1, GRBModel model2) throws GRBException {
+        GRBVar[] variablesModel1 = model1.getVars();
+        GRBConstr[] constrModel1 = model1.getConstrs();
+        GRBVar[] variablesModel2 = model2.getVars();
+        GRBConstr[] constrModel2 = model2.getConstrs();
+        if ((variablesModel1.length != variablesModel2.length) | (constrModel1.length != constrModel2.length))
+            return false;
+        for (int i = 0; i < variablesModel1.length; i++) {
+            if (variablesModel1[i].get(GRB.DoubleAttr.X) != variablesModel2[i].get(GRB.DoubleAttr.X))
+                return false;
+        }
+        for (int i = 0; i < constrModel1.length; i++) {
+            if (constrModel1[i].get(GRB.DoubleAttr.Slack) != constrModel2[i].get(GRB.DoubleAttr.Slack))
+                return false;
+        }
+
+        return true;
+    }
+
     public static void stampaSoluzioneUnica(GRBModel model) throws GRBException {
-        System.out.printf("La soluzione ottima %sè unica",
+        System.out.printf("La soluzione ottima %sè unica\n",
                 isSoluzioneOttimaUnica(model) ? "" : "non ");
     }
 
     public static boolean isSoluzioneOttimaUnica(GRBModel model) throws GRBException {
-//        for (GRBVar v: model.getVars())
-//            if (Math.abs(v.get(GRB.DoubleAttr.RHS)) < 1e-6)
-//                return false;
+        for (GRBVar v: model.getVars())
+            if (v.get(GRB.IntAttr.VBasis) != GRB.BASIC && Math.abs(v.get(GRB.DoubleAttr.RC)) < 1e-6)
+                return false;
         for (GRBConstr c: model.getConstrs())
-            if (Math.abs(c.get(GRB.DoubleAttr.RHS)) < 1e-6)
+            if (c.get(GRB.IntAttr.CBasis) != GRB.BASIC && Math.abs(c.get(GRB.DoubleAttr.RC)) < 1e-6)
                 return false;
 
         return true;
@@ -85,7 +122,7 @@ public class Main {
         ArrayList<GRBVar> variabiliDegenere = getVariabiliDegenere(model);
         ArrayList<GRBConstr> constrDegenere = getConstrDegenere(model);
         if (variabiliDegenere.isEmpty() && constrDegenere.isEmpty()) {
-            System.out.println("La soluzione trovata non è degenere");
+            System.out.println("La soluzione trovata non è degenere\n");
             return;
         }
 
@@ -209,7 +246,7 @@ public class Main {
         env.set(GRB.IntParam.Method, 0);
         env.set(GRB.IntParam.Presolve, 0);
         env.set(GRB.DoubleParam.Heuristics, 0);
-        //env.set(GRB.IntParam.LogToConsole, 0);
+        env.set(GRB.IntParam.LogToConsole, 0);
     }
 
     public static GRBVar[][] aggiungiVariabiliIntere(GRBModel model) throws GRBException {

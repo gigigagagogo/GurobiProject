@@ -1,3 +1,4 @@
+\ Model intero
 \ LP format - for model browsing. Use MPS format to capture full model detail.
 Maximize
   x_7_0 + x_7_1 + x_7_2 + x_7_3 + x_7_4 + x_7_5 + x_7_6 + x_7_7 + x_7_8

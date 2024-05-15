@@ -72,6 +72,7 @@ public class Main {
             aggiungiVincolo6(interoStar);
             aggiungiVincolo7(interoStar, b);
             aggiungiVincolo7(interoStar, c);
+            aggiungiVincolo8(interoStar);
 
             interoStar.optimize();
 
@@ -200,7 +201,6 @@ public class Main {
         GRBLinExpr expr = new GRBLinExpr();
         for (int j = 0; j < d; j++)
             expr.addTerm(1, x[k][j]);
-
         model.setObjective(expr, GRB.MAXIMIZE);
     }
 
@@ -253,7 +253,6 @@ public class Main {
             GRBLinExpr lhs = new GRBLinExpr();
             for (int i = 0; i < n; i++)
                 lhs.addTerm(1, x[i][j]);
-
             model.addConstr(lhs, GRB.LESS_EQUAL, tmax, String.format("ore_massime_studiate_nel_giorno_%d", j));
         }
     }
@@ -262,9 +261,9 @@ public class Main {
         for (int i = 0; i < n; i++) {
             for (int j = 2; j < d; j++) {
                 GRBLinExpr lhs = new GRBLinExpr();
-                for (int m = j; m > j - 3; m--)
+                for (int m = j; m > j - 3; m--){
                     lhs.addTerm(1, y[i][m]);
-
+                }
                 model.addConstr(lhs, GRB.LESS_EQUAL, 2, String.format("materia_%d_non_studiata_3_giorni_di_fila_dal_giorno_%d", i, j-2));
             }
 
@@ -275,10 +274,25 @@ public class Main {
         for (int j = 1; j < d; j++) {
             GRBLinExpr lhs = new GRBLinExpr();
             GRBLinExpr rhs = new GRBLinExpr();
-            lhs.addTerm(1, y[i][j-1]);
+
+            lhs.addTerm(1, y[a][i]);
             rhs.addConstant(1);
-            rhs.addTerm(-1, y[a][j]);
-            model.addConstr(lhs, GRB.LESS_EQUAL, rhs, String.format("materia_%d_studiata_giorno_%d_se_giorno_%d_non_studiata_%d", a, j, j-1, i));
+            rhs.addTerm(-1, y[i][j-1]);
+
+            model.addConstr(lhs, GRB.LESS_EQUAL, rhs, String.format("materia_%d_studiata_giorno_%d_se_giorno_%d_non_studiata_%d", a, j, j-1,i));
+        }
+    }
+
+    public static void aggiungiVincolo8(GRBModel model) throws GRBException{
+        for(int j = 1; j<d; j++){
+            GRBLinExpr lhs = new GRBLinExpr();
+            GRBLinExpr rhs = new GRBLinExpr();
+
+            lhs.addTerm(1, y[a][j]);
+            rhs.addConstant(1);
+            rhs.addTerm(-1, y[b][j-1]);
+            rhs.addTerm(-1,y [c][j-1]);
+            model.addConstr(lhs, GRB.GREATER_EQUAL, rhs, String.format("dobbia_implicazione_%d_%d_%d",b,c,j-1));
         }
     }
 

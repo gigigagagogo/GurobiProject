@@ -284,7 +284,7 @@ public class Main {
     }
 
     public static void aggiungiVincolo8(GRBModel model) throws GRBException{
-        for(int j = 1; j<d; j++){
+        for(int j = 1; j < d; j++){
             GRBLinExpr lhs = new GRBLinExpr();
             GRBLinExpr rhs = new GRBLinExpr();
 

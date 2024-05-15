@@ -66,6 +66,15 @@ public class Main {
             System.out.print("[1.b] ");
             stampaOttimoCoincidente(intero, rilassato);
 
+            System.out.printf("------------------------------ Modello: %s ------------------------------\n", intero.get(GRB.StringAttr.ModelName));
+            aggiungiVincolo6(intero);
+            aggiungiVincolo7(intero, b);
+            aggiungiVincolo7(intero, c);
+            intero.optimize();
+            System.out.print("[2] ");
+            stampaValoreOttimo(intero);
+
+
             intero.write("logs/write.lp");
 
             intero.dispose();
@@ -78,7 +87,7 @@ public class Main {
     }
 
     public static void stampaOttimoCoincidente(GRBModel model1, GRBModel model2) throws GRBException {
-        System.out.printf("Le soluzioni ottime di %s e %s %scoincidono",
+        System.out.printf("Le soluzioni ottime di %s e %s %scoincidono\n",
                 model1.get(GRB.StringAttr.ModelName),
                 model2.get(GRB.StringAttr.ModelName),
                 isOttimoCoincidente(model1, model2) ? "" : "non ");
@@ -240,6 +249,34 @@ public class Main {
             }
             model.addConstr(lhs, GRB.LESS_EQUAL, tmax, String.format("ore_massime_studiate_nel_giorno_%d", j));
         }
+    }
+
+    public static void aggiungiVincolo6(GRBModel model) throws GRBException {
+        for (int i = 0; i < n; i++) {
+            for (int j = 2; j < d; j++) {
+                GRBLinExpr lhs = new GRBLinExpr();
+                for (int m = j; m > j - 3; m--) {
+                    lhs.addTerm(1, y[i][m]);
+                }
+//                lhs.addTerm(1, y[i][j-2]);
+//                lhs.addTerm(1, y[i][j-1]);
+//                lhs.addTerm(1, y[i][j]);
+                model.addConstr(lhs, GRB.LESS_EQUAL, 2, String.format("materia_%d_non_studiata_3_giorni_di_fila_dal_giorno_%d", i, j-2));
+            }
+
+        }
+    }
+
+    public static void aggiungiVincolo7(GRBModel model, int i) throws GRBException {
+        for (int j = 1; j < d; j++) {
+            GRBLinExpr lhs = new GRBLinExpr();
+            GRBLinExpr rhs = new GRBLinExpr();
+            lhs.addTerm(1, y[i][j]);
+            rhs.addConstant(1);
+            rhs.addTerm(-1, y[a][j-1]);
+            model.addConstr(lhs, GRB.LESS_EQUAL, rhs, String.format("materia_%d_studiata_giorno_%d_se_giorno_%d_non_studiata_%d", a, j, j-1, i));
+        }
+
     }
 
     public static void impostaParametri(GRBEnv env) throws GRBException {

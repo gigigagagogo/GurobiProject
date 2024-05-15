@@ -4744,3 +4744,498 @@ Iteration    Objective       Primal Inf.    Dual Inf.      Time
 
 Solved in 79 iterations and 0.00 seconds (0.00 work units)
 Optimal objective  9.400000000e+01
+
+Gurobi 11.0.0 (mac64[arm], Java) logging started Wed May 15 16:37:55 2024
+
+Set parameter Username
+Academic license - for non-commercial use only - expires 2025-03-01
+Set parameter Method to value 0
+Set parameter Presolve to value 0
+Set parameter Heuristics to value 0
+Set parameter LogToConsole to value 0
+Gurobi Optimizer version 11.0.0 build v11.0.0rc2 (mac64[arm] - Darwin 23.4.0 23E224)
+
+CPU model: Apple M1
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 347 rows, 308 columns and 1036 nonzeros
+Model fingerprint: 0xb61fa878
+Variable types: 0 continuous, 308 integer (154 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e+00, 1e+01]
+Variable types: 0 continuous, 308 integer (154 binary)
+
+Root relaxation: objective 9.400000e+01, 93 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   94.00000    0    7          -   94.00000      -     -    0s
+     0     0   93.00000    0   21          -   93.00000      -     -    0s
+H    0     0                      93.0000000   93.00000  0.00%     -    0s
+     0     0   93.00000    0   21   93.00000   93.00000  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 6
+  Implied bound: 8
+  MIR: 9
+  StrongCG: 2
+  Flow cover: 10
+
+Explored 1 nodes (188 simplex iterations) in 0.02 seconds (0.00 work units)
+Thread count was 8 (of 8 available processors)
+
+Solution count 1: 93 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.300000000000e+01, best bound 9.300000000000e+01, gap 0.0000%
+Gurobi Optimizer version 11.0.0 build v11.0.0rc2 (mac64[arm] - Darwin 23.4.0 23E224)
+
+CPU model: Apple M1
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 347 rows, 308 columns and 1036 nonzeros
+Model fingerprint: 0x772b1582
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e+00, 1e+01]
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0   -0.0000000e+00   5.400000e+01   1.540000e+08      0s
+      79    9.4000000e+01   0.000000e+00   0.000000e+00      0s
+
+Solved in 79 iterations and 0.00 seconds (0.00 work units)
+Optimal objective  9.400000000e+01
+Gurobi Optimizer version 11.0.0 build v11.0.0rc2 (mac64[arm] - Darwin 23.4.0 23E224)
+
+CPU model: Apple M1
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 479 rows, 308 columns and 1432 nonzeros
+Model fingerprint: 0xb298c72e
+Variable types: 0 continuous, 308 integer (154 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e+00, 1e+01]
+
+MIP start from previous solve did not produce a new incumbent solution
+MIP start from previous solve violates constraint materia_7_non_studiata_3_giorni_di_fila_dal_giorno_3 by 1.000000000
+
+Variable types: 0 continuous, 308 integer (154 binary)
+
+Root relaxation: objective 9.400000e+01, 77 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   94.00000    0   10          -   94.00000      -     -    0s
+H    0     0                      85.0000000   94.00000  10.6%     -    0s
+     0     0   93.00000    0   36   85.00000   93.00000  9.41%     -    0s
+     0     0   93.00000    0   27   85.00000   93.00000  9.41%     -    0s
+     0     0   93.00000    0   47   85.00000   93.00000  9.41%     -    0s
+     0     0   93.00000    0   42   85.00000   93.00000  9.41%     -    0s
+     0     0   93.00000    0    4   85.00000   93.00000  9.41%     -    0s
+     0     0   93.00000    0    9   85.00000   93.00000  9.41%     -    0s
+     0     0   93.00000    0    9   85.00000   93.00000  9.41%     -    0s
+     0     2   93.00000    0    9   85.00000   93.00000  9.41%     -    0s
+*  255   418              45      90.0000000   93.00000  3.33%  13.2    0s
+*  313   418              43      91.0000000   93.00000  2.20%  12.1    0s
+ 24470   999     cutoff   33        91.00000   92.00000  1.10%  17.8    5s
+
+Cutting planes:
+  Gomory: 5
+  Cover: 37
+  Implied bound: 42
+  MIR: 331
+  StrongCG: 7
+  Flow cover: 252
+  Inf proof: 6
+  Zero half: 2
+  RLT: 3
+
+Explored 32910 nodes (576877 simplex iterations) in 6.61 seconds (5.01 work units)
+Thread count was 8 (of 8 available processors)
+
+Solution count 3: 91 90 85 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.100000000000e+01, best bound 9.100000000000e+01, gap 0.0000%
+
+Gurobi 11.0.0 (mac64[arm], Java) logging started Wed May 15 16:38:29 2024
+
+Set parameter Username
+Academic license - for non-commercial use only - expires 2025-03-01
+Set parameter Method to value 0
+Set parameter Presolve to value 0
+Set parameter Heuristics to value 0
+Set parameter LogToConsole to value 0
+Gurobi Optimizer version 11.0.0 build v11.0.0rc2 (mac64[arm] - Darwin 23.4.0 23E224)
+
+CPU model: Apple M1
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 347 rows, 308 columns and 1036 nonzeros
+Model fingerprint: 0xb61fa878
+Variable types: 0 continuous, 308 integer (154 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e+00, 1e+01]
+Variable types: 0 continuous, 308 integer (154 binary)
+
+Root relaxation: objective 9.400000e+01, 93 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   94.00000    0    7          -   94.00000      -     -    0s
+     0     0   93.00000    0   21          -   93.00000      -     -    0s
+H    0     0                      93.0000000   93.00000  0.00%     -    0s
+     0     0   93.00000    0   21   93.00000   93.00000  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 6
+  Implied bound: 8
+  MIR: 9
+  StrongCG: 2
+  Flow cover: 10
+
+Explored 1 nodes (188 simplex iterations) in 0.02 seconds (0.00 work units)
+Thread count was 8 (of 8 available processors)
+
+Solution count 1: 93 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.300000000000e+01, best bound 9.300000000000e+01, gap 0.0000%
+Gurobi Optimizer version 11.0.0 build v11.0.0rc2 (mac64[arm] - Darwin 23.4.0 23E224)
+
+CPU model: Apple M1
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 347 rows, 308 columns and 1036 nonzeros
+Model fingerprint: 0x772b1582
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e+00, 1e+01]
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0   -0.0000000e+00   5.400000e+01   1.540000e+08      0s
+      79    9.4000000e+01   0.000000e+00   0.000000e+00      0s
+
+Solved in 79 iterations and 0.00 seconds (0.00 work units)
+Optimal objective  9.400000000e+01
+Gurobi Optimizer version 11.0.0 build v11.0.0rc2 (mac64[arm] - Darwin 23.4.0 23E224)
+
+CPU model: Apple M1
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 479 rows, 308 columns and 1432 nonzeros
+Model fingerprint: 0xb298c72e
+Variable types: 0 continuous, 308 integer (154 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e+00, 1e+01]
+
+MIP start from previous solve did not produce a new incumbent solution
+MIP start from previous solve violates constraint materia_7_non_studiata_3_giorni_di_fila_dal_giorno_3 by 1.000000000
+
+Variable types: 0 continuous, 308 integer (154 binary)
+
+Root relaxation: objective 9.400000e+01, 77 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   94.00000    0   10          -   94.00000      -     -    0s
+H    0     0                      85.0000000   94.00000  10.6%     -    0s
+     0     0   93.00000    0   36   85.00000   93.00000  9.41%     -    0s
+     0     0   93.00000    0   27   85.00000   93.00000  9.41%     -    0s
+     0     0   93.00000    0   47   85.00000   93.00000  9.41%     -    0s
+     0     0   93.00000    0   42   85.00000   93.00000  9.41%     -    0s
+     0     0   93.00000    0    4   85.00000   93.00000  9.41%     -    0s
+     0     0   93.00000    0    9   85.00000   93.00000  9.41%     -    0s
+     0     0   93.00000    0    9   85.00000   93.00000  9.41%     -    0s
+     0     2   93.00000    0    9   85.00000   93.00000  9.41%     -    0s
+*  255   418              45      90.0000000   93.00000  3.33%  13.2    0s
+*  313   418              43      91.0000000   93.00000  2.20%  12.1    0s
+ 25800   860     cutoff   28        91.00000   92.00000  1.10%  17.7    5s
+
+Cutting planes:
+  Gomory: 5
+  Cover: 37
+  Implied bound: 42
+  MIR: 331
+  StrongCG: 7
+  Flow cover: 252
+  Inf proof: 6
+  Zero half: 2
+  RLT: 3
+
+Explored 32910 nodes (576877 simplex iterations) in 6.28 seconds (5.01 work units)
+Thread count was 8 (of 8 available processors)
+
+Solution count 3: 91 90 85 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.100000000000e+01, best bound 9.100000000000e+01, gap 0.0000%
+
+Gurobi 11.0.0 (mac64[arm], Java) logging started Wed May 15 16:39:04 2024
+
+Set parameter Username
+Academic license - for non-commercial use only - expires 2025-03-01
+Set parameter Method to value 0
+Set parameter Presolve to value 0
+Set parameter Heuristics to value 0
+Set parameter LogToConsole to value 0
+Gurobi Optimizer version 11.0.0 build v11.0.0rc2 (mac64[arm] - Darwin 23.4.0 23E224)
+
+CPU model: Apple M1
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 347 rows, 308 columns and 1036 nonzeros
+Model fingerprint: 0xb61fa878
+Variable types: 0 continuous, 308 integer (154 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e+00, 1e+01]
+Variable types: 0 continuous, 308 integer (154 binary)
+
+Root relaxation: objective 9.400000e+01, 93 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   94.00000    0    7          -   94.00000      -     -    0s
+     0     0   93.00000    0   21          -   93.00000      -     -    0s
+H    0     0                      93.0000000   93.00000  0.00%     -    0s
+     0     0   93.00000    0   21   93.00000   93.00000  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 6
+  Implied bound: 8
+  MIR: 9
+  StrongCG: 2
+  Flow cover: 10
+
+Explored 1 nodes (188 simplex iterations) in 0.02 seconds (0.00 work units)
+Thread count was 8 (of 8 available processors)
+
+Solution count 1: 93 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.300000000000e+01, best bound 9.300000000000e+01, gap 0.0000%
+Gurobi Optimizer version 11.0.0 build v11.0.0rc2 (mac64[arm] - Darwin 23.4.0 23E224)
+
+CPU model: Apple M1
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 347 rows, 308 columns and 1036 nonzeros
+Model fingerprint: 0x772b1582
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e+00, 1e+01]
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0   -0.0000000e+00   5.400000e+01   1.540000e+08      0s
+      79    9.4000000e+01   0.000000e+00   0.000000e+00      0s
+
+Solved in 79 iterations and 0.00 seconds (0.00 work units)
+Optimal objective  9.400000000e+01
+Gurobi Optimizer version 11.0.0 build v11.0.0rc2 (mac64[arm] - Darwin 23.4.0 23E224)
+
+CPU model: Apple M1
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 479 rows, 308 columns and 1432 nonzeros
+Model fingerprint: 0xb298c72e
+Variable types: 0 continuous, 308 integer (154 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e+00, 1e+01]
+
+MIP start from previous solve did not produce a new incumbent solution
+MIP start from previous solve violates constraint materia_7_non_studiata_3_giorni_di_fila_dal_giorno_3 by 1.000000000
+
+Variable types: 0 continuous, 308 integer (154 binary)
+
+Root relaxation: objective 9.400000e+01, 77 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   94.00000    0   10          -   94.00000      -     -    0s
+H    0     0                      85.0000000   94.00000  10.6%     -    0s
+     0     0   93.00000    0   36   85.00000   93.00000  9.41%     -    0s
+     0     0   93.00000    0   27   85.00000   93.00000  9.41%     -    0s
+     0     0   93.00000    0   47   85.00000   93.00000  9.41%     -    0s
+     0     0   93.00000    0   42   85.00000   93.00000  9.41%     -    0s
+     0     0   93.00000    0    4   85.00000   93.00000  9.41%     -    0s
+     0     0   93.00000    0    9   85.00000   93.00000  9.41%     -    0s
+     0     0   93.00000    0    9   85.00000   93.00000  9.41%     -    0s
+     0     2   93.00000    0    9   85.00000   93.00000  9.41%     -    0s
+*  255   418              45      90.0000000   93.00000  3.33%  13.2    0s
+*  313   418              43      91.0000000   93.00000  2.20%  12.1    0s
+ 25800   860     cutoff   28        91.00000   92.00000  1.10%  17.7    5s
+
+Cutting planes:
+  Gomory: 5
+  Cover: 37
+  Implied bound: 42
+  MIR: 331
+  StrongCG: 7
+  Flow cover: 252
+  Inf proof: 6
+  Zero half: 2
+  RLT: 3
+
+Explored 32910 nodes (576877 simplex iterations) in 6.15 seconds (5.01 work units)
+Thread count was 8 (of 8 available processors)
+
+Solution count 3: 91 90 85 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.100000000000e+01, best bound 9.100000000000e+01, gap 0.0000%
+
+Gurobi 11.0.0 (mac64[arm], Java) logging started Wed May 15 16:46:36 2024
+
+Set parameter Username
+Academic license - for non-commercial use only - expires 2025-03-01
+Set parameter Method to value 0
+Set parameter Presolve to value 0
+Set parameter Heuristics to value 0
+Set parameter LogToConsole to value 0
+Gurobi Optimizer version 11.0.0 build v11.0.0rc2 (mac64[arm] - Darwin 23.4.0 23E224)
+
+CPU model: Apple M1
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 347 rows, 308 columns and 1036 nonzeros
+Model fingerprint: 0xb61fa878
+Variable types: 0 continuous, 308 integer (154 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e+00, 1e+01]
+Variable types: 0 continuous, 308 integer (154 binary)
+
+Root relaxation: objective 9.400000e+01, 93 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   94.00000    0    7          -   94.00000      -     -    0s
+     0     0   93.00000    0   21          -   93.00000      -     -    0s
+H    0     0                      93.0000000   93.00000  0.00%     -    0s
+     0     0   93.00000    0   21   93.00000   93.00000  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 6
+  Implied bound: 8
+  MIR: 9
+  StrongCG: 2
+  Flow cover: 10
+
+Explored 1 nodes (188 simplex iterations) in 0.02 seconds (0.00 work units)
+Thread count was 8 (of 8 available processors)
+
+Solution count 1: 93 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.300000000000e+01, best bound 9.300000000000e+01, gap 0.0000%
+Gurobi Optimizer version 11.0.0 build v11.0.0rc2 (mac64[arm] - Darwin 23.4.0 23E224)
+
+CPU model: Apple M1
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 347 rows, 308 columns and 1036 nonzeros
+Model fingerprint: 0x772b1582
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e+00, 1e+01]
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0   -0.0000000e+00   5.400000e+01   1.540000e+08      0s
+      79    9.4000000e+01   0.000000e+00   0.000000e+00      0s
+
+Solved in 79 iterations and 0.00 seconds (0.00 work units)
+Optimal objective  9.400000000e+01
+Gurobi Optimizer version 11.0.0 build v11.0.0rc2 (mac64[arm] - Darwin 23.4.0 23E224)
+
+CPU model: Apple M1
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 505 rows, 308 columns and 1484 nonzeros
+Model fingerprint: 0x3f8018e1
+Variable types: 0 continuous, 308 integer (154 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 2e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+01]
+
+MIP start from previous solve did not produce a new incumbent solution
+MIP start from previous solve violates constraint materia_7_non_studiata_3_giorni_di_fila_dal_giorno_3 by 1.000000000
+
+Variable types: 0 continuous, 308 integer (154 binary)
+
+Root relaxation: objective 9.400000e+01, 74 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   94.00000    0    7          -   94.00000      -     -    0s
+     0     0   93.91304    0   23          -   93.91304      -     -    0s
+     0     0   93.00000    0   62          -   93.00000      -     -    0s
+H    0     0                      77.0000000   93.00000  20.8%     -    0s
+     0     0   93.00000    0   41   77.00000   93.00000  20.8%     -    0s
+H    0     0                      80.0000000   93.00000  16.2%     -    0s
+     0     0   93.00000    0   45   80.00000   93.00000  16.2%     -    0s
+     0     0   93.00000    0   38   80.00000   93.00000  16.2%     -    0s
+H    0     0                      85.0000000   93.00000  9.41%     -    0s
+     0     0   93.00000    0   18   85.00000   93.00000  9.41%     -    0s
+     0     0   93.00000    0    8   85.00000   93.00000  9.41%     -    0s
+     0     0   93.00000    0    8   85.00000   93.00000  9.41%     -    0s
+     0     0   93.00000    0   15   85.00000   93.00000  9.41%     -    0s
+     0     0   93.00000    0   20   85.00000   93.00000  9.41%     -    0s
+     0     0   93.00000    0   10   85.00000   93.00000  9.41%     -    0s
+     0     0   93.00000    0   10   85.00000   93.00000  9.41%     -    0s
+     0     2   93.00000    0   10   85.00000   93.00000  9.41%     -    0s
+*  215   284              23      90.0000000   93.00000  3.33%  15.5    0s
+*  400   463              35      91.0000000   93.00000  2.20%  13.4    0s
+
+Cutting planes:
+  Gomory: 6
+  Cover: 13
+  Implied bound: 24
+  MIR: 116
+  StrongCG: 4
+  Flow cover: 125
+  Inf proof: 8
+  Zero half: 2
+  RLT: 1
+  Relax-and-lift: 2
+
+Explored 12657 nodes (255696 simplex iterations) in 2.68 seconds (1.92 work units)
+Thread count was 8 (of 8 available processors)
+
+Solution count 5: 91 90 85 ... 77
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.100000000000e+01, best bound 9.100000000000e+01, gap 0.0000%

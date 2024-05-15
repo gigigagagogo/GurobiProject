@@ -473,6 +473,322 @@ Subject To
    + x_4_12 + x_5_12 + x_6_12 + x_7_12 + x_8_12 + x_9_12 + x_10_12 <= 10
  ore_massime_studiate_nel_giorno_13: x_0_13 + x_1_13 + x_2_13 + x_3_13
    + x_4_13 + x_5_13 + x_6_13 + x_7_13 + x_8_13 + x_9_13 + x_10_13 <= 10
+ materia_0_non_studiata_3_giorni_di_fila_dal_giorno_0: y_0_0 + y_0_1
+   + y_0_2 <= 2
+ materia_0_non_studiata_3_giorni_di_fila_dal_giorno_1: y_0_1 + y_0_2
+   + y_0_3 <= 2
+ materia_0_non_studiata_3_giorni_di_fila_dal_giorno_2: y_0_2 + y_0_3
+   + y_0_4 <= 2
+ materia_0_non_studiata_3_giorni_di_fila_dal_giorno_3: y_0_3 + y_0_4
+   + y_0_5 <= 2
+ materia_0_non_studiata_3_giorni_di_fila_dal_giorno_4: y_0_4 + y_0_5
+   + y_0_6 <= 2
+ materia_0_non_studiata_3_giorni_di_fila_dal_giorno_5: y_0_5 + y_0_6
+   + y_0_7 <= 2
+ materia_0_non_studiata_3_giorni_di_fila_dal_giorno_6: y_0_6 + y_0_7
+   + y_0_8 <= 2
+ materia_0_non_studiata_3_giorni_di_fila_dal_giorno_7: y_0_7 + y_0_8
+   + y_0_9 <= 2
+ materia_0_non_studiata_3_giorni_di_fila_dal_giorno_8: y_0_8 + y_0_9
+   + y_0_10 <= 2
+ materia_0_non_studiata_3_giorni_di_fila_dal_giorno_9: y_0_9 + y_0_10
+   + y_0_11 <= 2
+ materia_0_non_studiata_3_giorni_di_fila_dal_giorno_10: y_0_10 + y_0_11
+   + y_0_12 <= 2
+ materia_0_non_studiata_3_giorni_di_fila_dal_giorno_11: y_0_11 + y_0_12
+   + y_0_13 <= 2
+ materia_1_non_studiata_3_giorni_di_fila_dal_giorno_0: y_1_0 + y_1_1
+   + y_1_2 <= 2
+ materia_1_non_studiata_3_giorni_di_fila_dal_giorno_1: y_1_1 + y_1_2
+   + y_1_3 <= 2
+ materia_1_non_studiata_3_giorni_di_fila_dal_giorno_2: y_1_2 + y_1_3
+   + y_1_4 <= 2
+ materia_1_non_studiata_3_giorni_di_fila_dal_giorno_3: y_1_3 + y_1_4
+   + y_1_5 <= 2
+ materia_1_non_studiata_3_giorni_di_fila_dal_giorno_4: y_1_4 + y_1_5
+   + y_1_6 <= 2
+ materia_1_non_studiata_3_giorni_di_fila_dal_giorno_5: y_1_5 + y_1_6
+   + y_1_7 <= 2
+ materia_1_non_studiata_3_giorni_di_fila_dal_giorno_6: y_1_6 + y_1_7
+   + y_1_8 <= 2
+ materia_1_non_studiata_3_giorni_di_fila_dal_giorno_7: y_1_7 + y_1_8
+   + y_1_9 <= 2
+ materia_1_non_studiata_3_giorni_di_fila_dal_giorno_8: y_1_8 + y_1_9
+   + y_1_10 <= 2
+ materia_1_non_studiata_3_giorni_di_fila_dal_giorno_9: y_1_9 + y_1_10
+   + y_1_11 <= 2
+ materia_1_non_studiata_3_giorni_di_fila_dal_giorno_10: y_1_10 + y_1_11
+   + y_1_12 <= 2
+ materia_1_non_studiata_3_giorni_di_fila_dal_giorno_11: y_1_11 + y_1_12
+   + y_1_13 <= 2
+ materia_2_non_studiata_3_giorni_di_fila_dal_giorno_0: y_2_0 + y_2_1
+   + y_2_2 <= 2
+ materia_2_non_studiata_3_giorni_di_fila_dal_giorno_1: y_2_1 + y_2_2
+   + y_2_3 <= 2
+ materia_2_non_studiata_3_giorni_di_fila_dal_giorno_2: y_2_2 + y_2_3
+   + y_2_4 <= 2
+ materia_2_non_studiata_3_giorni_di_fila_dal_giorno_3: y_2_3 + y_2_4
+   + y_2_5 <= 2
+ materia_2_non_studiata_3_giorni_di_fila_dal_giorno_4: y_2_4 + y_2_5
+   + y_2_6 <= 2
+ materia_2_non_studiata_3_giorni_di_fila_dal_giorno_5: y_2_5 + y_2_6
+   + y_2_7 <= 2
+ materia_2_non_studiata_3_giorni_di_fila_dal_giorno_6: y_2_6 + y_2_7
+   + y_2_8 <= 2
+ materia_2_non_studiata_3_giorni_di_fila_dal_giorno_7: y_2_7 + y_2_8
+   + y_2_9 <= 2
+ materia_2_non_studiata_3_giorni_di_fila_dal_giorno_8: y_2_8 + y_2_9
+   + y_2_10 <= 2
+ materia_2_non_studiata_3_giorni_di_fila_dal_giorno_9: y_2_9 + y_2_10
+   + y_2_11 <= 2
+ materia_2_non_studiata_3_giorni_di_fila_dal_giorno_10: y_2_10 + y_2_11
+   + y_2_12 <= 2
+ materia_2_non_studiata_3_giorni_di_fila_dal_giorno_11: y_2_11 + y_2_12
+   + y_2_13 <= 2
+ materia_3_non_studiata_3_giorni_di_fila_dal_giorno_0: y_3_0 + y_3_1
+   + y_3_2 <= 2
+ materia_3_non_studiata_3_giorni_di_fila_dal_giorno_1: y_3_1 + y_3_2
+   + y_3_3 <= 2
+ materia_3_non_studiata_3_giorni_di_fila_dal_giorno_2: y_3_2 + y_3_3
+   + y_3_4 <= 2
+ materia_3_non_studiata_3_giorni_di_fila_dal_giorno_3: y_3_3 + y_3_4
+   + y_3_5 <= 2
+ materia_3_non_studiata_3_giorni_di_fila_dal_giorno_4: y_3_4 + y_3_5
+   + y_3_6 <= 2
+ materia_3_non_studiata_3_giorni_di_fila_dal_giorno_5: y_3_5 + y_3_6
+   + y_3_7 <= 2
+ materia_3_non_studiata_3_giorni_di_fila_dal_giorno_6: y_3_6 + y_3_7
+   + y_3_8 <= 2
+ materia_3_non_studiata_3_giorni_di_fila_dal_giorno_7: y_3_7 + y_3_8
+   + y_3_9 <= 2
+ materia_3_non_studiata_3_giorni_di_fila_dal_giorno_8: y_3_8 + y_3_9
+   + y_3_10 <= 2
+ materia_3_non_studiata_3_giorni_di_fila_dal_giorno_9: y_3_9 + y_3_10
+   + y_3_11 <= 2
+ materia_3_non_studiata_3_giorni_di_fila_dal_giorno_10: y_3_10 + y_3_11
+   + y_3_12 <= 2
+ materia_3_non_studiata_3_giorni_di_fila_dal_giorno_11: y_3_11 + y_3_12
+   + y_3_13 <= 2
+ materia_4_non_studiata_3_giorni_di_fila_dal_giorno_0: y_4_0 + y_4_1
+   + y_4_2 <= 2
+ materia_4_non_studiata_3_giorni_di_fila_dal_giorno_1: y_4_1 + y_4_2
+   + y_4_3 <= 2
+ materia_4_non_studiata_3_giorni_di_fila_dal_giorno_2: y_4_2 + y_4_3
+   + y_4_4 <= 2
+ materia_4_non_studiata_3_giorni_di_fila_dal_giorno_3: y_4_3 + y_4_4
+   + y_4_5 <= 2
+ materia_4_non_studiata_3_giorni_di_fila_dal_giorno_4: y_4_4 + y_4_5
+   + y_4_6 <= 2
+ materia_4_non_studiata_3_giorni_di_fila_dal_giorno_5: y_4_5 + y_4_6
+   + y_4_7 <= 2
+ materia_4_non_studiata_3_giorni_di_fila_dal_giorno_6: y_4_6 + y_4_7
+   + y_4_8 <= 2
+ materia_4_non_studiata_3_giorni_di_fila_dal_giorno_7: y_4_7 + y_4_8
+   + y_4_9 <= 2
+ materia_4_non_studiata_3_giorni_di_fila_dal_giorno_8: y_4_8 + y_4_9
+   + y_4_10 <= 2
+ materia_4_non_studiata_3_giorni_di_fila_dal_giorno_9: y_4_9 + y_4_10
+   + y_4_11 <= 2
+ materia_4_non_studiata_3_giorni_di_fila_dal_giorno_10: y_4_10 + y_4_11
+   + y_4_12 <= 2
+ materia_4_non_studiata_3_giorni_di_fila_dal_giorno_11: y_4_11 + y_4_12
+   + y_4_13 <= 2
+ materia_5_non_studiata_3_giorni_di_fila_dal_giorno_0: y_5_0 + y_5_1
+   + y_5_2 <= 2
+ materia_5_non_studiata_3_giorni_di_fila_dal_giorno_1: y_5_1 + y_5_2
+   + y_5_3 <= 2
+ materia_5_non_studiata_3_giorni_di_fila_dal_giorno_2: y_5_2 + y_5_3
+   + y_5_4 <= 2
+ materia_5_non_studiata_3_giorni_di_fila_dal_giorno_3: y_5_3 + y_5_4
+   + y_5_5 <= 2
+ materia_5_non_studiata_3_giorni_di_fila_dal_giorno_4: y_5_4 + y_5_5
+   + y_5_6 <= 2
+ materia_5_non_studiata_3_giorni_di_fila_dal_giorno_5: y_5_5 + y_5_6
+   + y_5_7 <= 2
+ materia_5_non_studiata_3_giorni_di_fila_dal_giorno_6: y_5_6 + y_5_7
+   + y_5_8 <= 2
+ materia_5_non_studiata_3_giorni_di_fila_dal_giorno_7: y_5_7 + y_5_8
+   + y_5_9 <= 2
+ materia_5_non_studiata_3_giorni_di_fila_dal_giorno_8: y_5_8 + y_5_9
+   + y_5_10 <= 2
+ materia_5_non_studiata_3_giorni_di_fila_dal_giorno_9: y_5_9 + y_5_10
+   + y_5_11 <= 2
+ materia_5_non_studiata_3_giorni_di_fila_dal_giorno_10: y_5_10 + y_5_11
+   + y_5_12 <= 2
+ materia_5_non_studiata_3_giorni_di_fila_dal_giorno_11: y_5_11 + y_5_12
+   + y_5_13 <= 2
+ materia_6_non_studiata_3_giorni_di_fila_dal_giorno_0: y_6_0 + y_6_1
+   + y_6_2 <= 2
+ materia_6_non_studiata_3_giorni_di_fila_dal_giorno_1: y_6_1 + y_6_2
+   + y_6_3 <= 2
+ materia_6_non_studiata_3_giorni_di_fila_dal_giorno_2: y_6_2 + y_6_3
+   + y_6_4 <= 2
+ materia_6_non_studiata_3_giorni_di_fila_dal_giorno_3: y_6_3 + y_6_4
+   + y_6_5 <= 2
+ materia_6_non_studiata_3_giorni_di_fila_dal_giorno_4: y_6_4 + y_6_5
+   + y_6_6 <= 2
+ materia_6_non_studiata_3_giorni_di_fila_dal_giorno_5: y_6_5 + y_6_6
+   + y_6_7 <= 2
+ materia_6_non_studiata_3_giorni_di_fila_dal_giorno_6: y_6_6 + y_6_7
+   + y_6_8 <= 2
+ materia_6_non_studiata_3_giorni_di_fila_dal_giorno_7: y_6_7 + y_6_8
+   + y_6_9 <= 2
+ materia_6_non_studiata_3_giorni_di_fila_dal_giorno_8: y_6_8 + y_6_9
+   + y_6_10 <= 2
+ materia_6_non_studiata_3_giorni_di_fila_dal_giorno_9: y_6_9 + y_6_10
+   + y_6_11 <= 2
+ materia_6_non_studiata_3_giorni_di_fila_dal_giorno_10: y_6_10 + y_6_11
+   + y_6_12 <= 2
+ materia_6_non_studiata_3_giorni_di_fila_dal_giorno_11: y_6_11 + y_6_12
+   + y_6_13 <= 2
+ materia_7_non_studiata_3_giorni_di_fila_dal_giorno_0: y_7_0 + y_7_1
+   + y_7_2 <= 2
+ materia_7_non_studiata_3_giorni_di_fila_dal_giorno_1: y_7_1 + y_7_2
+   + y_7_3 <= 2
+ materia_7_non_studiata_3_giorni_di_fila_dal_giorno_2: y_7_2 + y_7_3
+   + y_7_4 <= 2
+ materia_7_non_studiata_3_giorni_di_fila_dal_giorno_3: y_7_3 + y_7_4
+   + y_7_5 <= 2
+ materia_7_non_studiata_3_giorni_di_fila_dal_giorno_4: y_7_4 + y_7_5
+   + y_7_6 <= 2
+ materia_7_non_studiata_3_giorni_di_fila_dal_giorno_5: y_7_5 + y_7_6
+   + y_7_7 <= 2
+ materia_7_non_studiata_3_giorni_di_fila_dal_giorno_6: y_7_6 + y_7_7
+   + y_7_8 <= 2
+ materia_7_non_studiata_3_giorni_di_fila_dal_giorno_7: y_7_7 + y_7_8
+   + y_7_9 <= 2
+ materia_7_non_studiata_3_giorni_di_fila_dal_giorno_8: y_7_8 + y_7_9
+   + y_7_10 <= 2
+ materia_7_non_studiata_3_giorni_di_fila_dal_giorno_9: y_7_9 + y_7_10
+   + y_7_11 <= 2
+ materia_7_non_studiata_3_giorni_di_fila_dal_giorno_10: y_7_10 + y_7_11
+   + y_7_12 <= 2
+ materia_7_non_studiata_3_giorni_di_fila_dal_giorno_11: y_7_11 + y_7_12
+   + y_7_13 <= 2
+ materia_8_non_studiata_3_giorni_di_fila_dal_giorno_0: y_8_0 + y_8_1
+   + y_8_2 <= 2
+ materia_8_non_studiata_3_giorni_di_fila_dal_giorno_1: y_8_1 + y_8_2
+   + y_8_3 <= 2
+ materia_8_non_studiata_3_giorni_di_fila_dal_giorno_2: y_8_2 + y_8_3
+   + y_8_4 <= 2
+ materia_8_non_studiata_3_giorni_di_fila_dal_giorno_3: y_8_3 + y_8_4
+   + y_8_5 <= 2
+ materia_8_non_studiata_3_giorni_di_fila_dal_giorno_4: y_8_4 + y_8_5
+   + y_8_6 <= 2
+ materia_8_non_studiata_3_giorni_di_fila_dal_giorno_5: y_8_5 + y_8_6
+   + y_8_7 <= 2
+ materia_8_non_studiata_3_giorni_di_fila_dal_giorno_6: y_8_6 + y_8_7
+   + y_8_8 <= 2
+ materia_8_non_studiata_3_giorni_di_fila_dal_giorno_7: y_8_7 + y_8_8
+   + y_8_9 <= 2
+ materia_8_non_studiata_3_giorni_di_fila_dal_giorno_8: y_8_8 + y_8_9
+   + y_8_10 <= 2
+ materia_8_non_studiata_3_giorni_di_fila_dal_giorno_9: y_8_9 + y_8_10
+   + y_8_11 <= 2
+ materia_8_non_studiata_3_giorni_di_fila_dal_giorno_10: y_8_10 + y_8_11
+   + y_8_12 <= 2
+ materia_8_non_studiata_3_giorni_di_fila_dal_giorno_11: y_8_11 + y_8_12
+   + y_8_13 <= 2
+ materia_9_non_studiata_3_giorni_di_fila_dal_giorno_0: y_9_0 + y_9_1
+   + y_9_2 <= 2
+ materia_9_non_studiata_3_giorni_di_fila_dal_giorno_1: y_9_1 + y_9_2
+   + y_9_3 <= 2
+ materia_9_non_studiata_3_giorni_di_fila_dal_giorno_2: y_9_2 + y_9_3
+   + y_9_4 <= 2
+ materia_9_non_studiata_3_giorni_di_fila_dal_giorno_3: y_9_3 + y_9_4
+   + y_9_5 <= 2
+ materia_9_non_studiata_3_giorni_di_fila_dal_giorno_4: y_9_4 + y_9_5
+   + y_9_6 <= 2
+ materia_9_non_studiata_3_giorni_di_fila_dal_giorno_5: y_9_5 + y_9_6
+   + y_9_7 <= 2
+ materia_9_non_studiata_3_giorni_di_fila_dal_giorno_6: y_9_6 + y_9_7
+   + y_9_8 <= 2
+ materia_9_non_studiata_3_giorni_di_fila_dal_giorno_7: y_9_7 + y_9_8
+   + y_9_9 <= 2
+ materia_9_non_studiata_3_giorni_di_fila_dal_giorno_8: y_9_8 + y_9_9
+   + y_9_10 <= 2
+ materia_9_non_studiata_3_giorni_di_fila_dal_giorno_9: y_9_9 + y_9_10
+   + y_9_11 <= 2
+ materia_9_non_studiata_3_giorni_di_fila_dal_giorno_10: y_9_10 + y_9_11
+   + y_9_12 <= 2
+ materia_9_non_studiata_3_giorni_di_fila_dal_giorno_11: y_9_11 + y_9_12
+   + y_9_13 <= 2
+ materia_10_non_studiata_3_giorni_di_fila_dal_giorno_0: y_10_0 + y_10_1
+   + y_10_2 <= 2
+ materia_10_non_studiata_3_giorni_di_fila_dal_giorno_1: y_10_1 + y_10_2
+   + y_10_3 <= 2
+ materia_10_non_studiata_3_giorni_di_fila_dal_giorno_2: y_10_2 + y_10_3
+   + y_10_4 <= 2
+ materia_10_non_studiata_3_giorni_di_fila_dal_giorno_3: y_10_3 + y_10_4
+   + y_10_5 <= 2
+ materia_10_non_studiata_3_giorni_di_fila_dal_giorno_4: y_10_4 + y_10_5
+   + y_10_6 <= 2
+ materia_10_non_studiata_3_giorni_di_fila_dal_giorno_5: y_10_5 + y_10_6
+   + y_10_7 <= 2
+ materia_10_non_studiata_3_giorni_di_fila_dal_giorno_6: y_10_6 + y_10_7
+   + y_10_8 <= 2
+ materia_10_non_studiata_3_giorni_di_fila_dal_giorno_7: y_10_7 + y_10_8
+   + y_10_9 <= 2
+ materia_10_non_studiata_3_giorni_di_fila_dal_giorno_8: y_10_8 + y_10_9
+   + y_10_10 <= 2
+ materia_10_non_studiata_3_giorni_di_fila_dal_giorno_9: y_10_9 + y_10_10
+   + y_10_11 <= 2
+ materia_10_non_studiata_3_giorni_di_fila_dal_giorno_10: y_10_10 + y_10_11
+   + y_10_12 <= 2
+ materia_10_non_studiata_3_giorni_di_fila_dal_giorno_11: y_10_11 + y_10_12
+   + y_10_13 <= 2
+ materia_8_studiata_giorno_1_se_giorno_0_non_studiata_5: y_5_1 + y_8_0
+   <= 1
+ materia_8_studiata_giorno_2_se_giorno_1_non_studiata_5: y_5_2 + y_8_1
+   <= 1
+ materia_8_studiata_giorno_3_se_giorno_2_non_studiata_5: y_5_3 + y_8_2
+   <= 1
+ materia_8_studiata_giorno_4_se_giorno_3_non_studiata_5: y_5_4 + y_8_3
+   <= 1
+ materia_8_studiata_giorno_5_se_giorno_4_non_studiata_5: y_5_5 + y_8_4
+   <= 1
+ materia_8_studiata_giorno_6_se_giorno_5_non_studiata_5: y_5_6 + y_8_5
+   <= 1
+ materia_8_studiata_giorno_7_se_giorno_6_non_studiata_5: y_5_7 + y_8_6
+   <= 1
+ materia_8_studiata_giorno_8_se_giorno_7_non_studiata_5: y_5_8 + y_8_7
+   <= 1
+ materia_8_studiata_giorno_9_se_giorno_8_non_studiata_5: y_5_9 + y_8_8
+   <= 1
+ materia_8_studiata_giorno_10_se_giorno_9_non_studiata_5: y_5_10 + y_8_9
+   <= 1
+ materia_8_studiata_giorno_11_se_giorno_10_non_studiata_5: y_5_11 + y_8_10
+   <= 1
+ materia_8_studiata_giorno_12_se_giorno_11_non_studiata_5: y_5_12 + y_8_11
+   <= 1
+ materia_8_studiata_giorno_13_se_giorno_12_non_studiata_5: y_5_13 + y_8_12
+   <= 1
+ materia_8_studiata_giorno_1_se_giorno_0_non_studiata_9: y_8_0 + y_9_1
+   <= 1
+ materia_8_studiata_giorno_2_se_giorno_1_non_studiata_9: y_8_1 + y_9_2
+   <= 1
+ materia_8_studiata_giorno_3_se_giorno_2_non_studiata_9: y_8_2 + y_9_3
+   <= 1
+ materia_8_studiata_giorno_4_se_giorno_3_non_studiata_9: y_8_3 + y_9_4
+   <= 1
+ materia_8_studiata_giorno_5_se_giorno_4_non_studiata_9: y_8_4 + y_9_5
+   <= 1
+ materia_8_studiata_giorno_6_se_giorno_5_non_studiata_9: y_8_5 + y_9_6
+   <= 1
+ materia_8_studiata_giorno_7_se_giorno_6_non_studiata_9: y_8_6 + y_9_7
+   <= 1
+ materia_8_studiata_giorno_8_se_giorno_7_non_studiata_9: y_8_7 + y_9_8
+   <= 1
+ materia_8_studiata_giorno_9_se_giorno_8_non_studiata_9: y_8_8 + y_9_9
+   <= 1
+ materia_8_studiata_giorno_10_se_giorno_9_non_studiata_9: y_8_9 + y_9_10
+   <= 1
+ materia_8_studiata_giorno_11_se_giorno_10_non_studiata_9: y_8_10 + y_9_11
+   <= 1
+ materia_8_studiata_giorno_12_se_giorno_11_non_studiata_9: y_8_11 + y_9_12
+   <= 1
+ materia_8_studiata_giorno_13_se_giorno_12_non_studiata_9: y_8_12 + y_9_13
+   <= 1
 Bounds
 Binaries
  y_0_0 y_0_1 y_0_2 y_0_3 y_0_4 y_0_5 y_0_6 y_0_7 y_0_8 y_0_9 y_0_10 y_0_11

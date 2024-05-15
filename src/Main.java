@@ -45,8 +45,10 @@ public class Main {
 
             intero.optimize();
 
-            intero.write("logs/write.lp");
+            stampaValoreOttimo(intero);
+            stampaVariabili(intero);
 
+            intero.write("logs/write.lp");
 
             intero.dispose();
             env.dispose();
@@ -58,9 +60,10 @@ public class Main {
     }
 
     private static void impostaParametri(GRBEnv env) throws GRBException {
-        env.set(GRB.IntParam.Method, -1);
-        env.set(GRB.IntParam.Presolve, -1);
+        env.set(GRB.IntParam.Method, 0);
+        env.set(GRB.IntParam.Presolve, 0);
         env.set(GRB.DoubleParam.Heuristics, 0);
+        //env.set(GRB.IntParam.LogToConsole, 0);
     }
 
     private static GRBVar[][] aggiungiVariabiliIntere(GRBModel model) throws GRBException {
@@ -88,6 +91,22 @@ public class Main {
             expr.addTerm(1, x[k][j]);
 
         model.setObjective(expr, GRB.MAXIMIZE);
+    }
+
+    public static void stampaVariabili(GRBModel model) throws GRBException {
+
+        System.out.println("Variabili non di slack/surplus:");
+        for(GRBVar v: model.getVars())
+            System.out.printf("\t%s = %s\n", v.get(GRB.StringAttr.VarName), v.get(GRB.DoubleAttr.X));
+
+        System.out.println("Variabili di slack/surplus:");
+        for(GRBConstr c: model.getConstrs())
+            System.out.printf("\t%s = %s\n", c.get(GRB.StringAttr.ConstrName), c.get(GRB.DoubleAttr.Slack));
+
+    }
+
+    public static void stampaValoreOttimo(GRBModel model) throws GRBException {
+        System.out.printf("Valore ottimo della funzione obiettivo: %s\n", model.get(GRB.DoubleAttr.ObjVal));
     }
 
     public static void aggiungiVincolo1(GRBModel model) throws GRBException {

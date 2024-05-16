@@ -129,7 +129,7 @@ public class Main {
             if (v.get(GRB.IntAttr.VBasis) != GRB.BASIC && Math.abs(v.get(GRB.DoubleAttr.RC)) < 1e-6)
                 return false;
         for (GRBConstr c: model.getConstrs())
-            if (c.get(GRB.IntAttr.CBasis) != GRB.BASIC && Math.abs(c.get(GRB.DoubleAttr.RC)) < 1e-6)
+            if (c.get(GRB.IntAttr.CBasis) != GRB.BASIC && Math.abs(c.get(GRB.DoubleAttr.Pi)) < 1e-6)
                 return false;
 
         return true;

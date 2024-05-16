@@ -1,6 +1,9 @@
 import com.gurobi.gurobi.*;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
+import java.lang.management.GarbageCollectorMXBean;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -24,8 +27,20 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            String filename = "instance-11";
+
+            String filename = "instance-1";
             parseInputFile("input/" + filename + ".txt");
+
+            for (int i = 0; i < tau.length; i++) {
+                System.out.print(tau[i]+"\t");
+            }
+
+            ///DEBUG
+            File outputFile = new File("logs/" + filename + ".log");
+            outputFile.delete();
+            PrintStream fileOutputStream = new PrintStream(outputFile);
+            System.setOut(fileOutputStream);
+            ///DEBUG
 
             GRBEnv env = new GRBEnv("logs/" + filename + ".log");
             impostaParametri(env);
@@ -50,9 +65,9 @@ public class Main {
             System.out.print("[1.a] ");
             stampaValoreOttimo(intero);
             System.out.print("[1.a] ");
-            stampaVariabili(intero);
+            //stampaVariabili(intero);
 
-            GRBModel rilassato = new GRBModel(intero.relax());
+            GRBModel rilassato = intero.relax();
             rilassato.set(GRB.StringAttr.ModelName, "rilassato");
             rilassato.optimize();
 
@@ -60,11 +75,11 @@ public class Main {
             System.out.print("[1.b] ");
             stampaVincoliAttivi(rilassato);
             System.out.print("[1.b] ");
-            stampaDegenere(rilassato);
+            //stampaDegenere(rilassato);
             System.out.print("[1.b] ");
-            stampaSoluzioneUnica(rilassato);
+            //stampaSoluzioneUnica(rilassato);
             System.out.print("[1.b] ");
-            stampaOttimoCoincidente(intero, rilassato);
+            //stampaOttimoCoincidente(intero, rilassato);
 
             GRBModel interoStar = new GRBModel(intero);
             interoStar.set(GRB.StringAttr.ModelName, "interoStar");
@@ -74,11 +89,29 @@ public class Main {
             aggiungiVincolo7(interoStar, c);
             aggiungiVincolo8(interoStar);
 
-            interoStar.optimize();
+            //interoStar.optimize();
 
             System.out.printf("------------------------------ Modello: %s ------------------------------\n", intero.get(GRB.StringAttr.ModelName));
             System.out.print("[2] ");
-            stampaValoreOttimo(interoStar);
+            //stampaValoreOttimo(interoStar);
+
+            getVariazioneMassima(rilassato, 1);
+
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < d; j++) {
+                    System.out.printf("\t%.2f", rilassato.getVarByName(String.format("x_%d_%d", i ,j)).get(GRB.DoubleAttr.X));
+                }
+                System.out.println();
+            }
+
+            System.out.println("Y");
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < d; j++) {
+                    System.out.printf("\t%.2f", rilassato.getVarByName(String.format("y_%d_%d", i ,j)).get(GRB.DoubleAttr.X));
+                }
+                System.out.println();
+            }
+
 
 
             intero.write("logs/write.lp");
@@ -91,6 +124,33 @@ public class Main {
         } catch (GRBException e) {
             e.printStackTrace();
             System.out.println("An exception occurred: " + e.getMessage());
+
+            ///DEBUG
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        ///DEBUG
+    }
+
+//    public static double getVariazioneMassima(GRBModel model, int i) throws GRBException {
+//        String constrName;
+//        double max = 0;
+//        for (int j = 0; j < d; j++) {
+//            constrName = String.format("ore_minime_studio_materia_%d_nel_giorno_%d_se_studiata", i, 1);
+//            double tmp = model.getConstrByName(constrName).get(GRB.DoubleAttr.SARHSUp);
+//            if ( tmp > max)
+//                max = tmp;
+//        }
+//
+//        return max > tau[i] ? max - tau[i] : tau[i] - max;
+//    }
+
+    public static void getVariazioneMassima(GRBModel model, int i) throws GRBException {
+        String constrName;
+        double max = 0;
+        for (int j = 0; j < n; j++) {
+            constrName = String.format("ore_minime_studio_materia_%d_nel_giorno_%d_se_studiata", i, j);
+            System.out.println(model.getConstrByName(constrName).get(GRB.DoubleAttr.SARHSUp));
         }
     }
 
@@ -220,7 +280,7 @@ public class Main {
                 GRBLinExpr lhs = new GRBLinExpr();
                 lhs.addTerm(1, x[i][j]);
                 GRBLinExpr rhs = new GRBLinExpr();
-                rhs.addTerm(tau[i], y[i][j]);
+                rhs.addTerm(tau[i]+1, y[i][j]);
                 model.addConstr(lhs, GRB.GREATER_EQUAL, rhs, String.format("ore_minime_studio_materia_%d_nel_giorno_%d_se_studiata", i, j));
             }
         }
@@ -261,7 +321,7 @@ public class Main {
         for (int i = 0; i < n; i++) {
             for (int j = 2; j < d; j++) {
                 GRBLinExpr lhs = new GRBLinExpr();
-                for (int m = j; m > j - 3; m--){
+                for (int m = j; m > j - 3; m--) {
                     lhs.addTerm(1, y[i][m]);
                 }
                 model.addConstr(lhs, GRB.LESS_EQUAL, 2, String.format("materia_%d_non_studiata_3_giorni_di_fila_dal_giorno_%d", i, j-2));
@@ -300,7 +360,7 @@ public class Main {
         env.set(GRB.IntParam.Method, -1);
         env.set(GRB.IntParam.Presolve, -1);
         env.set(GRB.DoubleParam.Heuristics, 0);
-        env.set(GRB.IntParam.LogToConsole, 1);
+        env.set(GRB.IntParam.LogToConsole, 0);
     }
 
     public static GRBVar[][] aggiungiVariabiliIntere(GRBModel model) throws GRBException {

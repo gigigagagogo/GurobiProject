@@ -76,7 +76,7 @@ public class Main {
 
             interoStar.optimize();
 
-            System.out.printf("------------------------------ Modello: %s ------------------------------\n", intero.get(GRB.StringAttr.ModelName));
+            System.out.printf("------------------------------ Modello: %s ------------------------------\n", interoStar.get(GRB.StringAttr.ModelName));
             System.out.print("[2] ");
             stampaValoreOttimo(interoStar);
 

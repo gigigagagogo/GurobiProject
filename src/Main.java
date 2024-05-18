@@ -41,9 +41,8 @@ public class Main {
             aggiungiVincolo1(intero);
             aggiungiVincolo2(intero);
             aggiungiVincolo3(intero);
-            //aggiungiVincolo4(intero);
+            aggiungiVincolo4(intero);
             aggiungiVincolo5(intero);
-            aggiungiVincolo6(intero);
 
             intero.optimize();
 
@@ -71,10 +70,10 @@ public class Main {
             GRBModel interoStar = new GRBModel(intero);
             interoStar.set(GRB.StringAttr.ModelName, "interoStar");
 
-            aggiungiVincolo7(interoStar);
-            aggiungiVincolo8(interoStar, b);
-            aggiungiVincolo8(interoStar, c);
-            aggiungiVincolo9(interoStar);
+            aggiungiVincolo6(interoStar);
+            aggiungiVincolo7(interoStar, b);
+            aggiungiVincolo7(interoStar, c);
+            aggiungiVincolo8(interoStar);
 
             interoStar.optimize();
 
@@ -277,7 +276,7 @@ public class Main {
         }
     }
 
-    public static void aggiungiVincolo5(GRBModel model) throws GRBException {
+    public static void aggiungiVincolo4(GRBModel model) throws GRBException {
         for (int j = 0; j < d; j++) {
             GRBLinExpr lhs = new GRBLinExpr();
             for(int i = 0; i < n; i++)
@@ -287,7 +286,7 @@ public class Main {
         }
     }
 
-    public static void aggiungiVincolo6(GRBModel model) throws GRBException {
+    public static void aggiungiVincolo5(GRBModel model) throws GRBException {
         for (int j = 0; j < d; j++) {
             GRBLinExpr lhs = new GRBLinExpr();
             for (int i = 0; i < n; i++)
@@ -296,7 +295,7 @@ public class Main {
         }
     }
 
-    public static void aggiungiVincolo7(GRBModel model) throws GRBException {
+    public static void aggiungiVincolo6(GRBModel model) throws GRBException {
         for (int i = 0; i < n; i++) {
             for (int j = 2; j < d; j++) {
                 GRBLinExpr lhs = new GRBLinExpr();
@@ -309,7 +308,7 @@ public class Main {
         }
     }
 
-    public static void aggiungiVincolo8(GRBModel model, int i) throws GRBException {
+    public static void aggiungiVincolo7(GRBModel model, int i) throws GRBException {
         for (int j = 1; j < d; j++) {
             GRBLinExpr lhs = new GRBLinExpr();
             GRBLinExpr rhs = new GRBLinExpr();
@@ -322,7 +321,7 @@ public class Main {
         }
     }
 
-    public static void aggiungiVincolo9(GRBModel model) throws GRBException{
+    public static void aggiungiVincolo8(GRBModel model) throws GRBException{
         for(int j = 1; j < d; j++){
             GRBLinExpr lhs = new GRBLinExpr();
             GRBLinExpr rhs = new GRBLinExpr();

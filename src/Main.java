@@ -7,6 +7,8 @@ import java.util.Scanner;
 public class Main {
     public static final String INPUT_FILE_FORMAT_ERROR = "Input file format error";
     public static final int BIGM = 10;
+    public static final double TOLLERANCE = 1e-6;
+    public static final double INF_LIMIT = 1e50;
     static Scanner fileScanner;
     static Scanner lineScanner;
     static int d; // inumero giorni
@@ -21,6 +23,7 @@ public class Main {
     static int c;
     static GRBVar[][] x;
     static GRBVar[][] y;
+    static GRBVar z;
 
     public static void main(String[] args) {
         try {
@@ -31,7 +34,7 @@ public class Main {
             impostaParametri(env);
 
             GRBModel intero = new GRBModel(env);
-            intero.set(GRB.StringAttr.ModelName, "intero");
+            intero.set(GRB.StringAttr.ModelName, "Intero");
 
             x = aggiungiVariabiliIntere(intero);
             y = aggiungiVariabiliBinarie(intero);
@@ -46,29 +49,12 @@ public class Main {
 
             intero.optimize();
 
-            System.out.printf("------------------------------ Modello: %s ------------------------------\n", intero.get(GRB.StringAttr.ModelName));
-            System.out.print("[1.a] ");
-            stampaValoreOttimo(intero);
-            System.out.print("[1.a] ");
-            stampaVariabili(intero);
-            stampaVincoliAttivi(intero);
-
             GRBModel rilassato = new GRBModel(intero.relax());
-            rilassato.set(GRB.StringAttr.ModelName, "rilassato");
+            rilassato.set(GRB.StringAttr.ModelName, "Rilassato");
             rilassato.optimize();
 
-            System.out.printf("------------------------------ Modello: %s ------------------------------\n", rilassato.get(GRB.StringAttr.ModelName));
-            System.out.print("[1.b] ");
-            stampaVincoliAttivi(rilassato);
-            System.out.print("[1.b] ");
-            stampaDegenere(rilassato);
-            System.out.print("[1.b] ");
-            stampaSoluzioneUnica(rilassato);
-            System.out.print("[1.b] ");
-            stampaOttimoCoincidente(intero, rilassato);
-
             GRBModel interoStar = new GRBModel(intero);
-            interoStar.set(GRB.StringAttr.ModelName, "interoStar");
+            interoStar.set(GRB.StringAttr.ModelName, "Nuovo Intero");
 
             aggiungiVincolo6(interoStar);
             aggiungiVincolo7(interoStar, b);
@@ -77,28 +63,82 @@ public class Main {
 
             interoStar.optimize();
 
-            System.out.printf("------------------------------ Modello: %s ------------------------------\n", interoStar.get(GRB.StringAttr.ModelName));
-            System.out.print("[2] ");
+            System.out.println("GRUPPO 3");
+            System.out.println("Componenti: Bararu Valperta");
+            System.out.println("QUESITO I:");
+            stampaValoreOttimo(intero);
+            stampaVariabili(intero);
+            stampaValoreOttimo(rilassato);
+            stampaVincoliAttivi(rilassato);
+            stampaDegenere(rilassato);
+            stampaSoluzioneMultipla(rilassato);
+            stampaOttimoCoincidente(rilassato, intero);
+
+            System.out.println("QUESITO II:");
             stampaValoreOttimo(interoStar);
-            stampaVincoliAttivi(interoStar);
 
+            System.out.println("QUESITO III:");
+            stampaIntervalloDeltaPi2(rilassato);
 
-            System.out.printf("[3.1] ");
-            System.out.println(getMinTauVariation(rilassato, 2) + " : " + getMaxTauVariation(rilassato, 2));
+            GRBModel minimizeTMAX = new GRBModel(interoStar);
+            z = minimizeTMAX.addVar(0, tmax, 0, GRB.INTEGER, "z");
+            editObjective(minimizeTMAX);
+            editVincolo2(minimizeTMAX);
+            minimizeTMAX.optimize();
 
-
-
-
-            intero.write("logs/write.lp");
+            stampaValoreMinimoTMAX(minimizeTMAX);
 
             intero.dispose();
             rilassato.dispose();
             interoStar.dispose();
+            minimizeTMAX.dispose();
             env.dispose();
 
         } catch (GRBException e) {
-            e.printStackTrace();
             System.out.println("An exception occurred: " + e.getMessage());
+        }
+    }
+
+    public static void stampaValoreMinimoTMAX(GRBModel model) throws GRBException {
+        double tmax_min = tmax - model.get(GRB.DoubleAttr.ObjVal);
+        System.out.printf("valore minimo t max = %s\n", tmax_min);
+    }
+
+    public static void stampaIntervalloDeltaPi2(GRBModel model) throws GRBException {
+        System.out.print("intervallo DELTA pi_2 = ");
+        double minTau = getMinTauVariation(model, 2);
+        if (minTau < -INF_LIMIT)
+            System.out.print("(-INF, ");
+        else
+            System.out.printf("[%s", minTau);
+        double maxTau = getMaxTauVariation(model, 2);
+        if (maxTau > INF_LIMIT)
+            System.out.print("+INF)\n");
+        else
+            System.out.printf("%s]\n", maxTau);
+    }
+
+    public static void editObjective(GRBModel model) throws GRBException {
+        GRBLinExpr expr = new GRBLinExpr();
+        expr.addTerm(1, z);
+        model.setObjective(expr, GRB.MAXIMIZE);
+    }
+
+    public static void editVincolo2(GRBModel model) throws GRBException {
+        String constrName;
+        for (int j = 0; j < d; j++) {
+            constrName = String.format("ore_massime_studiate_nel_giorno_%d", j);
+
+            model.remove(model.getConstrByName(constrName));
+
+            GRBLinExpr lhs = new GRBLinExpr();
+            for (int i = 0; i < n; i++)
+                lhs.addTerm(1, x[i][j]);
+            GRBLinExpr rhs = new GRBLinExpr();
+            rhs.addConstant(tmax);
+            rhs.addTerm(-1, z);
+            model.addConstr(lhs, GRB.LESS_EQUAL, rhs, String.format("ore_massime_studiate_nel_giorno_%d", j));
+
         }
     }
 
@@ -133,11 +173,12 @@ public class Main {
     }
 
     public static void stampaOttimoCoincidente(GRBModel model1, GRBModel model2) throws GRBException {
-        System.out.printf("Le soluzioni ottime di %s e %s %scoincidono\n",
+        System.out.printf("%s coincide con %s: %s\n",
                 model1.get(GRB.StringAttr.ModelName),
                 model2.get(GRB.StringAttr.ModelName),
-                isOttimoCoincidente(model1, model2) ? "" : "non ");
+                isOttimoCoincidente(model1, model2) ? "sì" : "no");
     }
+
     public static boolean isOttimoCoincidente(GRBModel model1, GRBModel model2) throws GRBException {
         GRBVar[] variablesModel1 = model1.getVars();
         GRBConstr[] constrModel1 = model1.getConstrs();
@@ -157,17 +198,17 @@ public class Main {
         return true;
     }
 
-    public static void stampaSoluzioneUnica(GRBModel model) throws GRBException {
-        System.out.printf("La soluzione ottima %sè unica\n",
-                isSoluzioneOttimaUnica(model) ? "" : "non ");
+    public static void stampaSoluzioneMultipla(GRBModel model) throws GRBException {
+        System.out.printf("Multipla: %s\n",
+                isSoluzioneOttimaUnica(model) ? "no" : "sì");
     }
 
     public static boolean isSoluzioneOttimaUnica(GRBModel model) throws GRBException {
-        for (GRBVar v: model.getVars())
-            if (v.get(GRB.IntAttr.VBasis) != GRB.BASIC && Math.abs(v.get(GRB.DoubleAttr.RC)) < 1e-6)
+        for (GRBVar v : model.getVars())
+            if (v.get(GRB.IntAttr.VBasis) != GRB.BASIC && Math.abs(v.get(GRB.DoubleAttr.RC)) < TOLLERANCE)
                 return false;
-        for (GRBConstr c: model.getConstrs())
-            if (c.get(GRB.IntAttr.CBasis) != GRB.BASIC && Math.abs(c.get(GRB.DoubleAttr.Pi)) < 1e-6)
+        for (GRBConstr c : model.getConstrs())
+            if (c.get(GRB.IntAttr.CBasis) != GRB.BASIC && Math.abs(c.get(GRB.DoubleAttr.Pi)) < TOLLERANCE)
                 return false;
 
         return true;
@@ -176,24 +217,13 @@ public class Main {
     public static void stampaDegenere(GRBModel model) throws GRBException {
         ArrayList<GRBVar> variabiliDegenere = getVariabiliDegenere(model);
         ArrayList<GRBConstr> constrDegenere = getConstrDegenere(model);
-        if (variabiliDegenere.isEmpty() && constrDegenere.isEmpty()) {
-            System.out.println("La soluzione trovata non è degenere\n");
-            return;
-        }
-
-        System.out.println("La soluzione trovata è degenere\nVariabili in base equivalenti a 0:");
-        for (GRBVar v: variabiliDegenere)
-            System.out.printf("\t%s\n", v.get(GRB.StringAttr.VarName));
-        for (GRBConstr c: constrDegenere)
-            System.out.printf("\t%s\n", c.get(GRB.StringAttr.ConstrName));
-        System.out.printf("\t(totale %d)\n", variabiliDegenere.size() + constrDegenere.size());
-
+        System.out.printf("Degenere: %s\n", variabiliDegenere.isEmpty() && constrDegenere.isEmpty() ? "no" : "sì");
     }
 
     public static ArrayList<GRBVar> getVariabiliDegenere(GRBModel model) throws GRBException {
         ArrayList<GRBVar> list = new ArrayList<>();
-        for (GRBVar v: model.getVars())
-            if (v.get(GRB.IntAttr.VBasis) == GRB.BASIC && Math.abs(v.get(GRB.DoubleAttr.X)) < 1e-6)
+        for (GRBVar v : model.getVars())
+            if (v.get(GRB.IntAttr.VBasis) == GRB.BASIC && Math.abs(v.get(GRB.DoubleAttr.X)) < TOLLERANCE)
                 list.add(v);
 
         return list;
@@ -201,41 +231,39 @@ public class Main {
 
     public static ArrayList<GRBConstr> getConstrDegenere(GRBModel model) throws GRBException {
         ArrayList<GRBConstr> list = new ArrayList<>();
-        for (GRBConstr c: model.getConstrs())
-            if (c.get(GRB.IntAttr.CBasis) == GRB.BASIC && Math.abs(c.get(GRB.DoubleAttr.Slack)) < 1e-6)
+        for (GRBConstr c : model.getConstrs())
+            if (c.get(GRB.IntAttr.CBasis) == GRB.BASIC && Math.abs(c.get(GRB.DoubleAttr.Slack)) < TOLLERANCE)
                 list.add(c);
 
         return list;
     }
 
     public static void stampaVariabili(GRBModel model) throws GRBException {
-        System.out.println("Variabili non di slack/surplus:");
-        for (GRBVar v: model.getVars())
+        System.out.println("Variabili:");
+        for (GRBVar v : model.getVars())
             System.out.printf("\t%s = %s\n", v.get(GRB.StringAttr.VarName), v.get(GRB.DoubleAttr.X));
 
-        System.out.println("Variabili di slack/surplus:");
-        for (GRBConstr c: model.getConstrs())
+        System.out.println("Slack/Surplus:");
+        for (GRBConstr c : model.getConstrs())
             System.out.printf("\t%s = %s\n", c.get(GRB.StringAttr.ConstrName), c.get(GRB.DoubleAttr.Slack));
 
     }
 
     public static void stampaValoreOttimo(GRBModel model) throws GRBException {
-        System.out.printf("Valore ottimo della funzione obiettivo: %s\n", model.get(GRB.DoubleAttr.ObjVal));
+        if (model.get(GRB.IntAttr.Status) == GRB.Status.OPTIMAL)
+            System.out.printf("Obj %s = %s\n", model.get(GRB.StringAttr.ModelName), model.get(GRB.DoubleAttr.ObjVal));
+        else
+            System.out.println("Il modello non è stato risolto");
     }
 
     public static void stampaVincoliAttivi(GRBModel model) throws GRBException {
-        int count = 0;
-        System.out.println("Vincoli attivi:");
-        for (GRBConstr c: model.getConstrs())
-            if (Math.abs(c.get(GRB.DoubleAttr.Slack)) < 1e-6) {
-                System.out.printf("\t%d - %s\n", c.index(), c.get(GRB.StringAttr.ConstrName));
-                count++;
-            }
-        System.out.printf("\t(totale %d)\n", count);
+        System.out.println("Elenco nomi vincoli attivi:");
+        for (GRBConstr c : model.getConstrs())
+            if (Math.abs(c.get(GRB.DoubleAttr.Slack)) < TOLLERANCE)
+                System.out.printf("\t%s\n", c.get(GRB.StringAttr.ConstrName));
     }
 
-    public static void aggiungiFunzioneObiettivo(GRBModel model) throws GRBException
-    {
+    public static void aggiungiFunzioneObiettivo(GRBModel model) throws GRBException {
         GRBLinExpr expr = new GRBLinExpr();
         for (int j = 0; j < d; j++)
             expr.addTerm(1, x[k][j]);
@@ -279,7 +307,7 @@ public class Main {
     public static void aggiungiVincolo4(GRBModel model) throws GRBException {
         for (int j = 0; j < d; j++) {
             GRBLinExpr lhs = new GRBLinExpr();
-            for(int i = 0; i < n; i++)
+            for (int i = 0; i < n; i++)
                 lhs.addTerm(1, y[i][j]);
 
             model.addConstr(lhs, GRB.LESS_EQUAL, l, String.format("materie_massime_studiate_nel_giorno_%d", j));
@@ -299,10 +327,10 @@ public class Main {
         for (int i = 0; i < n; i++) {
             for (int j = 2; j < d; j++) {
                 GRBLinExpr lhs = new GRBLinExpr();
-                for (int m = j; m > j - 3; m--){
+                for (int m = j; m > j - 3; m--) {
                     lhs.addTerm(1, y[i][m]);
                 }
-                model.addConstr(lhs, GRB.LESS_EQUAL, 2, String.format("materia_%d_non_studiata_3_giorni_di_fila_dal_giorno_%d", i, j-2));
+                model.addConstr(lhs, GRB.LESS_EQUAL, 2, String.format("materia_%d_non_studiata_3_giorni_di_fila_dal_giorno_%d", i, j - 2));
             }
 
         }
@@ -315,22 +343,22 @@ public class Main {
 
             lhs.addTerm(1, y[a][i]);
             rhs.addConstant(1);
-            rhs.addTerm(-1, y[i][j-1]);
+            rhs.addTerm(-1, y[i][j - 1]);
 
-            model.addConstr(lhs, GRB.LESS_EQUAL, rhs, String.format("materia_%d_studiata_giorno_%d_se_giorno_%d_non_studiata_%d", a, j, j-1,i));
+            model.addConstr(lhs, GRB.LESS_EQUAL, rhs, String.format("materia_%d_studiata_giorno_%d_se_giorno_%d_non_studiata_%d", a, j, j - 1, i));
         }
     }
 
-    public static void aggiungiVincolo8(GRBModel model) throws GRBException{
-        for(int j = 1; j < d; j++){
+    public static void aggiungiVincolo8(GRBModel model) throws GRBException {
+        for (int j = 1; j < d; j++) {
             GRBLinExpr lhs = new GRBLinExpr();
             GRBLinExpr rhs = new GRBLinExpr();
 
             lhs.addTerm(1, y[a][j]);
             rhs.addConstant(1);
-            rhs.addTerm(-1, y[b][j-1]);
-            rhs.addTerm(-1, y[c][j-1]);
-            model.addConstr(lhs, GRB.GREATER_EQUAL, rhs, String.format("dobbia_implicazione_%d_%d_%d", b, c, j-1));
+            rhs.addTerm(-1, y[b][j - 1]);
+            rhs.addTerm(-1, y[c][j - 1]);
+            model.addConstr(lhs, GRB.GREATER_EQUAL, rhs, String.format("dobbia_implicazione_%d_%d_%d", b, c, j - 1));
         }
     }
 
@@ -338,7 +366,7 @@ public class Main {
         env.set(GRB.IntParam.Method, 0);
         env.set(GRB.IntParam.Presolve, 0);
         env.set(GRB.DoubleParam.Heuristics, 0);
-        env.set(GRB.IntParam.LogToConsole, 1);
+        env.set(GRB.IntParam.LogToConsole, 0);
     }
 
     public static GRBVar[][] aggiungiVariabiliIntere(GRBModel model) throws GRBException {
@@ -360,7 +388,8 @@ public class Main {
     }
 
     public static int getVariableFromScanner(String expectedVariable) {
-        if (!fileScanner.hasNext() || !fileScanner.next().equals(expectedVariable)) throw new IllegalArgumentException(INPUT_FILE_FORMAT_ERROR);
+        if (!fileScanner.hasNext() || !fileScanner.next().equals(expectedVariable))
+            throw new IllegalArgumentException(INPUT_FILE_FORMAT_ERROR);
         try {
             String value = fileScanner.nextLine();
             return Integer.parseInt(value.trim());

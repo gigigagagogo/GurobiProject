@@ -99,13 +99,25 @@ public class Main {
         }
     }
 
+    /**
+     * Stampa il valore minimo che tmax può assumere affinchè il problema sia risolvibile.
+     *
+     * @param model il modello Gurobi
+     * @throws GRBException se c'è un errore Gurobi
+     */
     public static void stampaValoreMinimoTMAX(GRBModel model) throws GRBException {
         double tmax_min = tmax - model.get(GRB.DoubleAttr.ObjVal);
         System.out.printf("valore minimo t max = %s\n", tmax_min);
     }
 
+    /**
+     * Stampa la minima e massima variazione che potrebbe assumere tau_2
+     *
+     * @param model il modello Gurobi
+     * @throws GRBException se c'è un errore Gurobi
+     */
     public static void stampaIntervalloDeltaPi2(GRBModel model) throws GRBException {
-        System.out.print("intervallo DELTA pi_2 = ");
+        System.out.print("intervallo DELTA tau_2 = ");
         double minTau = getMinTauVariation(model, 2);
         if (minTau < -INF_LIMIT)
             System.out.print("(-INF, ");
@@ -118,12 +130,24 @@ public class Main {
             System.out.printf("%s]\n", maxTau);
     }
 
+    /**
+     * Modifica l'obiettivo del modello utilizzato per cercare la variazione massima di tmax
+     *
+     * @param model il modello Gurobi
+     * @throws GRBException se c'è un errore Gurobi
+     */
     public static void editObjective(GRBModel model) throws GRBException {
         GRBLinExpr expr = new GRBLinExpr();
         expr.addTerm(1, z);
         model.setObjective(expr, GRB.MAXIMIZE);
     }
 
+    /**
+     * Modifica il vincolo 2 del modello per risolvere la variazione massima di tmax
+     *
+     * @param model il modello Gurobi
+     * @throws GRBException se c'è un errore Gurobi
+     */
     public static void editVincolo2(GRBModel model) throws GRBException {
         String constrName;
         for (int j = 0; j < d; j++) {
@@ -142,6 +166,14 @@ public class Main {
         }
     }
 
+    /**
+     * Ottiene la variazione massima di tau per una data materia.
+     *
+     * @param model         il modello Gurobi
+     * @param indiceMateria l'indice della materia
+     * @return la variazione massima di tau
+     * @throws GRBException se c'è un errore Gurobi
+     */
     public static double getMaxTauVariation(GRBModel model, int indiceMateria) throws GRBException {
         String constrName = "ore_minime_studio_materia_%d_nel_giorno_%d_se_studiata";
         GRBConstr constr = model.getConstrByName(String.format(constrName, indiceMateria, 0));
@@ -157,6 +189,14 @@ public class Main {
         return (minValue + BIGM) - tau[indiceMateria];
     }
 
+    /**
+     * Ottiene la variazione minima di tau per una data materia.
+     *
+     * @param model         il modello Gurobi
+     * @param indiceMateria l'indice della materia
+     * @return la variazione minima di tau
+     * @throws GRBException se c'è un errore Gurobi
+     */
     public static double getMinTauVariation(GRBModel model, int indiceMateria) throws GRBException {
         String constrName = "ore_minime_studio_materia_%d_nel_giorno_%d_se_studiata";
         GRBConstr constr = model.getConstrByName(String.format(constrName, indiceMateria, 0));
@@ -172,6 +212,14 @@ public class Main {
         return -(tau[indiceMateria] - (maxValue + BIGM));
     }
 
+
+    /**
+     * Stampa se gli ottimi coincidono tra due modelli.
+     *
+     * @param model1 il primo modello Gurobi
+     * @param model2 il secondo modello Gurobi
+     * @throws GRBException se c'è un errore Gurobi
+     */
     public static void stampaOttimoCoincidente(GRBModel model1, GRBModel model2) throws GRBException {
         System.out.printf("%s coincide con %s: %s\n",
                 model1.get(GRB.StringAttr.ModelName),
@@ -179,6 +227,14 @@ public class Main {
                 isOttimoCoincidente(model1, model2) ? "sì" : "no");
     }
 
+    /**
+     * Ritorna se gli ottimi coincidono tra due modelli.
+     *
+     * @return se l'ottimo tra i due modelli è coincidente
+     * @param model1 il primo modello Gurobi
+     * @param model2 il secondo modello Gurobi
+     * @throws GRBException se c'è un errore Gurobi
+     */
     public static boolean isOttimoCoincidente(GRBModel model1, GRBModel model2) throws GRBException {
         GRBVar[] variablesModel1 = model1.getVars();
         GRBConstr[] constrModel1 = model1.getConstrs();
@@ -198,11 +254,24 @@ public class Main {
         return true;
     }
 
+    /**
+     * Stampa se c'è soluzione multipla.
+     *
+     * @param model il modello Gurobi
+     * @throws GRBException se c'è un errore Gurobi
+     */
     public static void stampaSoluzioneMultipla(GRBModel model) throws GRBException {
         System.out.printf("Multipla: %s\n",
                 isSoluzioneOttimaUnica(model) ? "no" : "sì");
     }
 
+    /**
+     * Ritorna se la soluzione del modello è unica
+     *
+     * @param model il modello Gurobi
+     * @return se la soluzione è ottima
+     * @throws GRBException se c'è un errore Gurobi
+     */
     public static boolean isSoluzioneOttimaUnica(GRBModel model) throws GRBException {
         for (GRBVar v : model.getVars())
             if (v.get(GRB.IntAttr.VBasis) != GRB.BASIC && Math.abs(v.get(GRB.DoubleAttr.RC)) < TOLLERANCE)
@@ -214,30 +283,41 @@ public class Main {
         return true;
     }
 
+    /**
+     * Stampa se il la soluzione è degenere.
+     *
+     * @param model il modello Gurobi
+     * @throws GRBException se c'è un errore Gurobi
+     */
     public static void stampaDegenere(GRBModel model) throws GRBException {
-        ArrayList<GRBVar> variabiliDegenere = getVariabiliDegenere(model);
-        ArrayList<GRBConstr> constrDegenere = getConstrDegenere(model);
-        System.out.printf("Degenere: %s\n", variabiliDegenere.isEmpty() && constrDegenere.isEmpty() ? "no" : "sì");
+
+        System.out.printf("Degenere: %s\n", isDegenere(model) ? "sì" : "no");
     }
 
-    public static ArrayList<GRBVar> getVariabiliDegenere(GRBModel model) throws GRBException {
-        ArrayList<GRBVar> list = new ArrayList<>();
+    /**
+     * Ritorna se la soluzione è degenere.
+     *
+     * @param model il modello Gurobi
+     * @throws GRBException se c'è un errore Gurobi
+     */
+    public static boolean isDegenere(GRBModel model) throws GRBException {
         for (GRBVar v : model.getVars())
             if (v.get(GRB.IntAttr.VBasis) == GRB.BASIC && Math.abs(v.get(GRB.DoubleAttr.X)) < TOLLERANCE)
-                list.add(v);
+                return true;
 
-        return list;
-    }
-
-    public static ArrayList<GRBConstr> getConstrDegenere(GRBModel model) throws GRBException {
-        ArrayList<GRBConstr> list = new ArrayList<>();
         for (GRBConstr c : model.getConstrs())
             if (c.get(GRB.IntAttr.CBasis) == GRB.BASIC && Math.abs(c.get(GRB.DoubleAttr.Slack)) < TOLLERANCE)
-                list.add(c);
+                return true;
 
-        return list;
+        return false;
     }
 
+    /**
+     * Stampa tutte le variabili del modello.
+     *
+     * @param model il modello Gurobi
+     * @throws GRBException se c'è un errore Gurobi
+     */
     public static void stampaVariabili(GRBModel model) throws GRBException {
         System.out.println("Variabili:");
         for (GRBVar v : model.getVars())
@@ -249,6 +329,12 @@ public class Main {
 
     }
 
+    /**
+     * Stampa il valore ottimo del modello ottimizzato.
+     *
+     * @param model il modello Gurobi
+     * @throws GRBException se c'è un errore Gurobi
+     */
     public static void stampaValoreOttimo(GRBModel model) throws GRBException {
         if (model.get(GRB.IntAttr.Status) == GRB.Status.OPTIMAL)
             System.out.printf("Obj %s = %s\n", model.get(GRB.StringAttr.ModelName), model.get(GRB.DoubleAttr.ObjVal));
@@ -256,6 +342,12 @@ public class Main {
             System.out.println("Il modello non è stato risolto");
     }
 
+    /**
+     * Stampa la lista di vincoli attivi alla soluzione ottima del modello.
+     *
+     * @param model il modello Gurobi
+     * @throws GRBException se c'è un errore Gurobi
+     */
     public static void stampaVincoliAttivi(GRBModel model) throws GRBException {
         System.out.println("Elenco nomi vincoli attivi:");
         for (GRBConstr c : model.getConstrs())
@@ -263,6 +355,12 @@ public class Main {
                 System.out.printf("\t%s\n", c.get(GRB.StringAttr.ConstrName));
     }
 
+    /**
+     * Aggiunge la funzione obiettivo richiesta nel modello
+     *
+     * @param model il modello Gurobi
+     * @throws GRBException se c'è un errore Gurobi
+     */
     public static void aggiungiFunzioneObiettivo(GRBModel model) throws GRBException {
         GRBLinExpr expr = new GRBLinExpr();
         for (int j = 0; j < d; j++)

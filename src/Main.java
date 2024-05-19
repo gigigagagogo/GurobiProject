@@ -439,7 +439,7 @@ public class Main {
             GRBLinExpr lhs = new GRBLinExpr();
             GRBLinExpr rhs = new GRBLinExpr();
 
-            lhs.addTerm(1, y[a][i]);
+            lhs.addTerm(1, y[a][j]);
             rhs.addConstant(1);
             rhs.addTerm(-1, y[i][j - 1]);
 
